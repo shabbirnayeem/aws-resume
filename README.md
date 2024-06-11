@@ -20,5 +20,7 @@ The project has the following structure:
 - `terraform`: Contain's the AWS infrastcure.
 - `Dockerfile`: Configuration for docker image.
 
-
+## Credit
+I am not a designer, so I used this template to create my site.
+https://styleshout.com/free-templates/ceevee/
 
