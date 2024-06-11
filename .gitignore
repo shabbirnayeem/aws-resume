@@ -158,3 +158,55 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+*.iml
+
+# MacOS-specific files
+.DS_Store
+
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+*.crash
+
+# Exclude any file with a .tfvars extension (can contain sensitive data)
+*.tfvars
+*.tfvars.json
+
+
+# Override files, typically used to override resources locally for testing
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform plan files
+*.tfplan
+
+# Terraform variables files
+terraform.tfvars
+terraform.tfvars.json
+
+# Ignore terraform.lock.hcl files which can contain provider dependency versions
+.terraform.lock.hcl
+
+# Ignore temporary files
+*.bak
+*.log
+*.backup
+*.swp
+*.temp
+*.tmp
+*.old
+*.orig

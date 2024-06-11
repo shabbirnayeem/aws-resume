@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+   <!--- Basic Page Needs
+   ================================================== -->
+   <meta charset="utf-8">
+	<title>Shabbir's Resume</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+   <!-- Mobile Specific Metas
+   ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+    ================================================== -->
+   <link rel="stylesheet" href="/static/css/default.css">
+	<link rel="stylesheet" href="/static/css/layout.css">
+   <link rel="stylesheet" href="/static/css/media-queries.css">
+   <link rel="stylesheet" href="/static/css/magnific-popup.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+   <!-- Script
+   ================================================== -->
+   <script src="static/js/modernizr.js"></script>
+   <script src="static/js/main.js"></script>
+   <script>
+      async function updateVisitorCount() {
+            try {
+                const response = await fetch('https://zjw6bjnqdj.execute-api.us-east-1.amazonaws.com/prd/count');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                const parsedBody = JSON.parse(data.body); // Parse the body string as JSON
+                console.log(parsedBody.count); // Output the count value
+                document.getElementById('counter').textContent = parsedBody.count;
+            } catch (error) {
+                console.error('Error fetching visitor count:', error);
+                document.getElementById('counter').textContent = 'Error';
+            }
+        }
+
+        updateVisitorCount();
+   </script>
+
+   <!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="/static/images/favicon.png" >
+
+</head>
+
+<body>
+
+   <!-- Header
+   ================================================== -->
+   <header id="home">
+
+      <nav id="nav-wrap">
+
+         <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+	      <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+         <ul id="nav" class="nav">
+            <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
+            <li><a class="smoothscroll" href="#about">About</a></li>
+	         <li><a class="smoothscroll" href="#resume">Resume</a></li>
+            <li><a class="smoothscroll" href="#projects">Projects/Learning</a></li>
+         </ul> <!-- end #nav -->
+
+      </nav> <!-- end #nav-wrap -->
+
+      <div class="row banner">
+         <div class="banner-text">
+            <h1 class="responsive-headline">Hi, I'm Shabbir</h1>
+            
+            <p style="font-size: 21px;">and this page has been viewed <span id="counter"></span> times</p>
+            <ul class="social">
+               <li><a href=""><i class="fab fa-twitter"></i></a></li>
+               <!-- <li><a href=""><i class="fa fa-external-link"></i></a></li> -->
+               <li><a href="https://www.linkedin.com/in/shabbir-nayeem/"><i class="fab fa-linkedin"></i></a></li>
+               <li><a href="https://gitlab.com/shabbirnayeem"><i class="fab fa-gitlab"></i></a></li>
+               <li><a href="https://github.com/shabbirnayeem"><i class="fab fa-github"></i></a></li>
+            </ul>
+         </div>
+      </div>
+
+      <p class="scrolldown">
+         <a class="smoothscroll" href="#about"><i class="icon-down-circle"></i></a>
+      </p>
+
+   </header> <!-- Header End -->
+
+
+   <!-- About Section
+   ================================================== -->
+   <section id="about">
+
+      <div class="row">
+
+         <div class="three columns">
+
+            <img class="profile-pic"  src="static/images/loader.gif" alt="" />
+
+         </div>
+
+         <div class="nine columns main-col">
+
+            <h2>ABOUT ME</h2>
+
+            <p> Hi, I'm Shabbir Nayeem, <span>DevOps Engineer at <a href="https://mediaradar.com/">MediaRadar.</a></span></p>
+            <p>
+               Experienced Cloud Infrastructure Specialist with extensive experience in cloud infrastructure management and automation. Skilled in PowerShell, Python, and Bash, Docker, Terraform, Jenkins, and Kubernetes. Demonstrated success in architecting, configuring, and maintaining high-performance cloud environments. Passionate about streamlining processes, optimizing CI/CD pipelines, and implementing robust security measures. Eager to leverage my skills and experience to drive innovation and efficiency in your organization. Let's connect and explore opportunities!
+            </p>
+         </div> <!-- end .main-col -->
+      </div>
+
+   </section> <!-- About Section End-->
+
+
+   <!-- Resume Section
+   ================================================== -->
+   <section id="resume">
+
+      <!-- Education
+      ----------------------------------------------- -->
+      <div class="row education">
+
+         <div class="three columns header-col">
+            <h1><span>Certifications</span></h1>
+         </div>
+
+         <div class="nine columns main-col">
+
+            <div class="row item">
+
+               <div class="twelve columns">
+
+                  <h3>AWS Certified Solutions Architect</h3>
+                  <p class="info"><em class="date">October 2020</em></p>
+
+               </div>
+
+            </div> <!-- item end -->
+
+            <div class="row item">
+
+               <div class="twelve columns">
+
+                  <h3>Azure Fundamentals AZ900</h3>
+                  <p class="info"><em class="date">January 2021</em></p>
+
+               </div>
+
+            </div> <!-- item end -->
+
+            <div class="row item">
+
+               <div class="twelve columns">
+
+                  <h3>CompTIA Linux+ xk0-00</h3>
+                  <p class="info"><em class="date">January 2020</em></p>
+
+               </div>
+
+            </div> <!-- item end -->
+
+            <div class="row item">
+
+               <div class="twelve columns">
+
+                  <h3>Cisco Certified Network Associate Routing & Switching (CCNA)</h3>
+                  <p class="info"><em class="date">March 2018</em></p>
+
+               </div>
+
+            </div> <!-- item end -->
+
+         </div> <!-- main-col end -->
+
+      </div> <!-- End Education -->
+
+
+      <!-- Work
+      ----------------------------------------------- -->
+      <div class="row work">
+
+         <div class="three columns header-col">
+            <h1><span>Work</span></h1>
+         </div>
+
+         <div class="nine columns main-col">
+
+            <div class="row item">
+
+               <div class="twelve columns">
+
+                  <h3>MediaRadar</h3>
+                  <p class="info">DevOps Engineer <span>&bull;</span> <em class="date">November 2023 - Present</em></p>
+
+                  <p>
+                  <li>Design, configure, and maintain cloud infrastructure on platforms such as AWS, Azure, or Google Cloud</li>
+                  <li>Implement infrastructure as code (IaC) principles for infrastructure provisioning and management</li>
+                  <li>Create, optimize, and automate CI/CD pipelines for software deployment</li>
+                  <li>Develop and maintain automation scripts and tools for deployment, configuration, and monitoring</li>
+                  <li>Create comprehensive documentation for the cloud infrastructure setup, configurations, and best practices</li>
+                  <li>Implement monitoring and alerting solutions to proactively detect and address issues</li>
+                  <li>Ensure security best practices are followed in the infrastructure setup</li>
+                  <li>Implement and maintain security measures, including access controls and data encryption</li>
+                  </p>
+
+               </div>
+
+            </div> <!-- item end -->
+
+            <div class="row item">
+
+               <div class="twelve columns">
+
+                  <h3>Numerator</h3>
+                  <p class="info">Systems Engineer – DevOps / Infrastructure <span>&bull;</span> <em class="date">August 2022 - August 2023</em></p>
+                  <p>
+                  <li>Azure infrastructure administration</li>
+                  <li>Automate infrastructure deployments using Terraform and Ansible</li>
+                  <li>Kubernetes administration</li>
+                  </p>
+
+               </div>
+
+            </div> <!-- item end -->
+
+            <div class="row item">
+
+               <div class="twelve columns">
+
+                  <h3>Schrödinger</h3>
+                  <p class="info">Associate System Administrator<span>&bull;</span> <em class="date">August 2021 - August 2022</em></p>
+
+                  <p>
+                     <li>Linux/MAC OS/Windows system administration</li>
+                     <li>Python / bash scripting</li>
+                     <li>Utilize modern directory infrastructure tech such as SAML, Okta, LDAP, and AD</li>
+                     <li>Okta administration: monitoring, troubleshooting and resolving incidents</li>
+                     <li>Atlassian suite administration</li>
+                  </p>
+
+               </div>
+
+            </div> <!-- item end -->
+
+            <div class="row item">
+
+               <div class="twelve columns">
+
+                  <h3>National Debt Relief</h3>
+                  <p class="info">Help Desk Analyst <span>&bull;</span> <em class="date">November 2018 - August 2021</em></p>
+
+                  <p>
+                  <li>O365 suite administration</li>
+                  <li>AWS Administration</li>
+                  <li>Write scripts automate repetitive tasks, modify and improve old PowerShell scripts </li>
+                  <li>Salesforce administration manage users, security profiles, groups, queues</li>
+                  </p>
+
+               </div>
+
+            </div> <!-- item end -->
+
+            <div class="row item">
+
+               <div class="twelve columns">
+
+                  <h3>Independence Care System</h3>
+                  <p class="info">IT Support Intern <span>&bull;</span> <em class="date">July 2017 - November 2018</em></p>
+
+                  <p>
+                  <li>Front line help desk IT support</li>
+                  </p>
+
+               </div>
+
+            </div> <!-- item end -->
+
+
+         </div> <!-- main-col end -->
+
+      </div> <!-- End Work -->
+
+      <!-- Project Section
+      ================================================== -->
+      <section id="projects">
+         <div class="row project">
+
+            <div class="three columns header-col">
+               <h1><span>Projects/Learning</span></h1>
+            </div>
+
+            <div class="nine columns main-col">
+
+               <div class="row item">
+
+                  <div class="twelve columns">
+
+                     <h3>Cloud Resume</h3>
+                     <h6>Overview</h6>
+                     <p>This project is a Dockerized Flask application that serves a web page and tracks the number of visitors using an AWS Lambda function. The application runs in a Docker container, ensuring a consistent runtime environment.</p>
+                     <h6>Infrastructure Overview</h6>
+                     <p>The application is deployed on AWS using Fargate with infrastructure managed by Terraform. Key components include:
+                     <li>Dockerized Flask Application</li>
+                     <li>AWS Elastic Container Registry (ECR)</li>
+                     <li>AWS Fargate for container orchestration</li>
+                     <li>AWS Application Load Balancer</li>
+                     <li>AWS Route 53 for DNS management</li>
+                     <li>AWS Lambda and API Gateway for backend processes and API management</li>
+                     <a href="https://github.com/shabbirnayeem/aws-resume">
+                        <img src="https://img.shields.io/badge/Review%20the%20Code-black?logo=github" alt="GitHub" style="vertical-align: middle;">
+                      </a>
+                     </p>
+                  </div>
+
+               </div> <!-- item end -->
+
+               <div class="row item">
+
+                  <div class="twelve columns">
+
+                     <h3>Automated Kubernetes Cluster Deployment in AWS</h3>
+                     <h6>Overview</h6>
+                     <p>Developed a guide and resource repository for building Kubernetes (K8s) clusters from scratch in AWS. This project includes detailed instructions and necessary files for setting up and configuring K8s deployments and services using Terraform and Ansible. Terraform automates the creation of infrastructure in AWS, while Ansible handles the configuration of worker and master nodes. With a single terraform apply command, users can deploy a fully functional Kubernetes cluster in AWS.</p>
+                     <p>
+                        <a href="https://gitlab.com/shabbirnayeem/kubernetes-learn/-/tree/main/build-k8-cluster">
+                           <img src="https://img.shields.io/badge/Review%20the%20Code-orange?logo=gitlab" alt="GitLab" style="vertical-align: middle;">
+                        </a>
+                     </p>
+                      
+                  </div>
+
+               </div> <!-- item end -->
+
+               <div class="row item">
+
+                  <div class="twelve columns">
+
+                     <h3>Image Analysis with Azure Cognitive Services</h3>
+                     <h6>Overview</h6>
+                     <p>This project uses Azure Cognitive Services to analyze images. It includes features for generating captions and extracting text from images. </p>
+                     <p>
+                        <a href="https://github.com/shabbirnayeem/challenge-project-cloud-ai">
+                           <img src="https://img.shields.io/badge/Review%20the%20Code-black?logo=github" alt="GitHub" style="vertical-align: middle;">
+                        </a>
+                     </p>
+                  </div>
+
+               </div> <!-- item end -->
+
+               <div class="row item">
+
+                  <div class="twelve columns">
+
+                  </div>
+
+               </div> <!-- item end -->
+
+            </div> <!-- main-col end -->
+
+         </div> <!-- End Project -->
+      </section> <!-- Project Section End-->
+
+   </section> <!-- Resume Section End-->
+
+   
+   <!-- footer
+   ================================================== -->
+   <footer>
+
+      <div class="row">
+
+         <div class="twelve columns">
+
+            <!-- <ul class="social-links">
+               <li><a href=""><i class="fa fa-twitter"></i></a></li>
+               <li><a href=""><i class="fa fa-external-link"></i></a></li>
+               <li><a href="https://www.linkedin.com/in/shabbir-nayeem/"><i class="fa fa-linkedin"></i></a></li>
+               <li><a href="https://gitlab.com/shabbirnayeem"><i class="fa fa-gitlab"></i></a></li>
+               <li><a href="https://github.com/shabbirnayeem"><i class="fa fa-github"></i></a></li>
+            </ul> -->
+            <ul class="social-links">
+               <li><a href=""><i class="fab fa-twitter"></i></a></li>
+               <!-- <li><a href=""><i class="fa fa-external-link"></i></a></li> -->
+               <li><a href="https://www.linkedin.com/in/shabbir-nayeem/"><i class="fab fa-linkedin"></i></a></li>
+               <li><a href="https://gitlab.com/shabbirnayeem"><i class="fab fa-gitlab"></i></a></li>
+               <li><a href="https://github.com/shabbirnayeem"><i class="fab fa-github"></i></a></li>
+            </ul>
+      
+            <ul class="copyright">
+               <a href="https://www.styleshout.com/free-templates/ceevee/"> Template by CeeVee </a>
+                
+            </ul>
+
+         </div>
+
+         <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#home"><i class="icon-up-open"></i></a></div>
+
+      </div>
+
+   </footer> <!-- Footer End-->
+
+   <!-- Java Script
+   ================================================== -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="static/js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script type="text/javascript" src="static/js/jquery-migrate-1.2.1.min.js"></script>
+
+   <script src="static/js/jquery.flexslider.js"></script>
+   <script src="static/js/waypoints.js"></script>
+   <script src="static/js/jquery.fittext.js"></script>
+   <script src="static/js/magnific-popup.js"></script>
+   <script src="static/js/init.js"></script>
+
+</body>
+
+</html>
