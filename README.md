@@ -6,6 +6,7 @@ This project is my Cloud Resume Challenge, hosted on AWS. The static website, de
 Before getting started with this project, make sure you have the following:
 
 - AWS account
+- Docker
 - Basic knowledge of HTML, CSS, and JavaScript
 - Familiarity with AWS services such as ECS, Lambda, and DynamoDB
 
@@ -19,6 +20,7 @@ The project has the following structure:
 - `README.md`: This file, providing project documentation and instructions.
 - `terraform`: Contain's the AWS infrastcure.
 - `Dockerfile`: Configuration for docker image.
+- `dicker-image-ci.yml`: Build and push docker image to Dockerhub using github action.
 
 ## Credit
 I am not a designer, so I used this template to create my site.
