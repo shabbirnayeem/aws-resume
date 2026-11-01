@@ -1,436 +1,413 @@
 <!DOCTYPE html>
-<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<html lang="en">
 <head>
-
-   <!--- Basic Page Needs
-   ================================================== -->
    <meta charset="utf-8">
-	<title>Shabbir's Resume</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Shabbir Nayeem · DevOps & Platform Engineer</title>
+   <meta name="description" content="Shabbir Nayeem: DevOps engineer building cloud infrastructure, CI/CD and Kubernetes platforms on AWS and Azure, growing into SRE and platform engineering.">
+   <meta name="author" content="Shabbir Nayeem">
 
-   <!-- Mobile Specific Metas
-   ================================================== -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<!-- CSS
-    ================================================== -->
-   <link rel="stylesheet" href="/static/css/default.css">
-	<link rel="stylesheet" href="/static/css/layout.css">
-   <link rel="stylesheet" href="/static/css/media-queries.css">
-   <link rel="stylesheet" href="/static/css/magnific-popup.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-   <!-- Script
-   ================================================== -->
-   <script src="static/js/modernizr.js"></script>
-   <script src="static/js/main.js"></script>
-   <script>
-      async function updateVisitorCount() {
-            try {
-                const response = await fetch('https://v79afzfyc2.execute-api.us-east-1.amazonaws.com/prd/count');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                const parsedBody = JSON.parse(data.body); // Parse the body string as JSON
-                console.log(parsedBody.count); // Output the count value
-                document.getElementById('counter').textContent = parsedBody.count;
-            } catch (error) {
-                console.error('Error fetching visitor count:', error);
-                document.getElementById('counter').textContent = 'Error';
-            }
-        }
-
-        updateVisitorCount();
-   </script>
-
-   <!-- Favicons
-	================================================== -->
-	<link rel="shortcut icon" href="/static/images/favicon.png" >
-
+   <link rel="stylesheet" href="/static/css/portfolio.css">
+   <link rel="shortcut icon" href="/static/images/favicon.png">
 </head>
 
 <body>
 
-   <!-- Header
+   <!-- Navigation
    ================================================== -->
-   <header id="home">
-
-      <nav id="nav-wrap">
-
-         <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
-	      <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
-
-         <ul id="nav" class="nav">
-            <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
-            <li><a class="smoothscroll" href="#about">About</a></li>
-	         <li><a class="smoothscroll" href="#resume">Resume</a></li>
-            <li><a class="smoothscroll" href="#projects">Projects/Learning</a></li>
-         </ul> <!-- end #nav -->
-
-      </nav> <!-- end #nav-wrap -->
-
-      <div class="row banner">
-         <div class="banner-text">
-            <h1 class="responsive-headline">Hi, I'm Shabbir</h1>
-            
-            <p style="font-size: 21px;">and this page has been viewed <span id="counter"></span> times</p>
-            <ul class="social">
-               <li><a href=""><i class="fab fa-twitter"></i></a></li>
-               <!-- <li><a href=""><i class="fa fa-external-link"></i></a></li> -->
-               <li><a href="https://www.linkedin.com/in/shabbir-nayeem/"><i class="fab fa-linkedin"></i></a></li>
-               <li><a href="https://gitlab.com/shabbirnayeem"><i class="fab fa-gitlab"></i></a></li>
-               <li><a href="https://github.com/shabbirnayeem"><i class="fab fa-github"></i></a></li>
-            </ul>
-         </div>
-      </div>
-
-      <p class="scrolldown">
-         <a class="smoothscroll" href="#about"><i class="icon-down-circle"></i></a>
-      </p>
-
-   </header> <!-- Header End -->
-
-
-   <!-- About Section
-   ================================================== -->
-   <section id="about">
-
-      <div class="row">
-
-         <div class="three columns">
-
-            <img class="profile-pic"  src="static/images/profile.jpg" alt="" />
-
-         </div>
-
-         <div class="nine columns main-col">
-
-            <h2>ABOUT ME</h2>
-
-            <p> Hi, I'm Shabbir Nayeem, <span>DevOps Engineer at <a href="https://mediaradar.com/">MediaRadar.</a></span></p>
-            <p>
-               Experienced Cloud Infrastructure Specialist with extensive experience in cloud infrastructure management and automation. Skilled in PowerShell, Python, and Bash, Docker, Terraform, Jenkins, and Kubernetes. Demonstrated success in architecting, configuring, and maintaining high-performance cloud environments. Passionate about streamlining processes, optimizing CI/CD pipelines, and implementing robust security measures. Eager to leverage my skills and experience to drive innovation and efficiency in your organization. Let's connect and explore opportunities!
-            </p>
-         </div> <!-- end .main-col -->
-      </div>
-
-   </section> <!-- About Section End-->
-
-
-   <!-- Resume Section
-   ================================================== -->
-   <section id="resume">
-
-      <!-- Education
-      ----------------------------------------------- -->
-      <div class="row education">
-
-         <div class="three columns header-col">
-            <h1><span>Certifications</span></h1>
-         </div>
-
-         <div class="nine columns main-col">
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>CKA: Certified Kubernetes Administrator</h3>
-                  <p class="info"><em class="date">October 2025</em></p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>AWS Certified Solutions Architect</h3>
-                  <p class="info"><em class="date">October 2020</em></p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Azure Fundamentals AZ900</h3>
-                  <p class="info"><em class="date">January 2021</em></p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>CompTIA Linux+ xk0-00</h3>
-                  <p class="info"><em class="date">January 2020</em></p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Cisco Certified Network Associate Routing & Switching (CCNA)</h3>
-                  <p class="info"><em class="date">March 2018</em></p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-         </div> <!-- main-col end -->
-
-      </div> <!-- End Education -->
-
-
-      <!-- Work
-      ----------------------------------------------- -->
-      <div class="row work">
-
-         <div class="three columns header-col">
-            <h1><span>Work</span></h1>
-         </div>
-
-         <div class="nine columns main-col">
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>MediaRadar</h3>
-                  <p class="info">DevOps Engineer <span>&bull;</span> <em class="date">November 2023 - Present</em></p>
-
-                  <p>
-                  <li>Design, configure, and maintain cloud infrastructure on platforms such as AWS, Azure, or Google Cloud</li>
-                  <li>Implement infrastructure as code (IaC) principles for infrastructure provisioning and management</li>
-                  <li>Create, optimize, and automate CI/CD pipelines for software deployment</li>
-                  <li>Develop and maintain automation scripts and tools for deployment, configuration, and monitoring</li>
-                  <li>Create comprehensive documentation for the cloud infrastructure setup, configurations, and best practices</li>
-                  <li>Implement monitoring and alerting solutions to proactively detect and address issues</li>
-                  <li>Ensure security best practices are followed in the infrastructure setup</li>
-                  <li>Implement and maintain security measures, including access controls and data encryption</li>
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Numerator</h3>
-                  <p class="info">Systems Engineer – DevOps / Infrastructure <span>&bull;</span> <em class="date">August 2022 - August 2023</em></p>
-                  <p>
-                  <li>Azure infrastructure administration</li>
-                  <li>Automate infrastructure deployments using Terraform and Ansible</li>
-                  <li>Kubernetes administration</li>
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Schrödinger</h3>
-                  <p class="info">Associate System Administrator<span>&bull;</span> <em class="date">August 2021 - August 2022</em></p>
-
-                  <p>
-                     <li>Linux/MAC OS/Windows system administration</li>
-                     <li>Python / bash scripting</li>
-                     <li>Utilize modern directory infrastructure tech such as SAML, Okta, LDAP, and AD</li>
-                     <li>Okta administration: monitoring, troubleshooting and resolving incidents</li>
-                     <li>Atlassian suite administration</li>
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>National Debt Relief</h3>
-                  <p class="info">Help Desk Analyst <span>&bull;</span> <em class="date">November 2018 - August 2021</em></p>
-
-                  <p>
-                  <li>O365 suite administration</li>
-                  <li>AWS Administration</li>
-                  <li>Write scripts automate repetitive tasks, modify and improve old PowerShell scripts </li>
-                  <li>Salesforce administration manage users, security profiles, groups, queues</li>
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Independence Care System</h3>
-                  <p class="info">IT Support Intern <span>&bull;</span> <em class="date">July 2017 - November 2018</em></p>
-
-                  <p>
-                  <li>Front line help desk IT support</li>
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-
-         </div> <!-- main-col end -->
-
-      </div> <!-- End Work -->
-
-      <!-- Project Section
+   <header class="site-header">
+      <nav class="container nav">
+         <a class="brand" href="#top"><span class="prompt">~$</span> shabbir</a>
+         <ul class="nav-links">
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+         </ul>
+         <button class="theme-toggle" type="button" aria-label="Toggle color theme"><i class="fas fa-adjust"></i></button>
+      </nav>
+   </header>
+
+   <main id="top">
+
+      <!-- Hero
       ================================================== -->
-      <section id="projects">
-         <div class="row project">
+      <section class="hero container">
+         <div class="hero-text">
+            <p class="eyebrow mono">DevOps Engineer &rarr; Platform / SRE</p>
+            <h1>Hi, I'm Shabbir. I build reliable cloud platforms.</h1>
+            <p class="lead">
+               DevOps Engineer at <a href="https://mediaradar.com/">MediaRadar</a>, where I run a multi-cloud Kubernetes
+               platform on AKS and EKS and use Terraform and ArgoCD to give teams self-service ways to deploy their apps.
+               Growing into SRE and platform engineering.
+            </p>
+            <div class="cta">
+               <a class="btn btn-primary" href="#projects">View projects</a>
+               <a class="btn" href="https://github.com/shabbirnayeem"><i class="fab fa-github"></i> GitHub</a>
+               <a class="btn" href="https://www.linkedin.com/in/shabbir-nayeem/"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
+         </div>
+         <img class="avatar" src="/static/images/profile.jpg" alt="Shabbir Nayeem">
+      </section>
 
-            <div class="three columns header-col">
-               <h1><span>Projects/Learning</span></h1>
+      <!-- Live status strip: this site is itself a project
+      ================================================== -->
+      <section class="container">
+         <div class="status-strip mono" aria-label="Site status">
+            <span><span class="dot"></span> live</span>
+            <span>host: <b>Raspberry Pi</b></span>
+            <span>ingress: <b>Cloudflare Tunnel</b></span>
+            <span>api: <b>AWS Lambda</b></span>
+            <span>visitors: <b id="counter">&hellip;</b></span>
+            <a href="#project-cloud-resume">how this site runs &rarr;</a>
+         </div>
+      </section>
+
+      <!-- Projects
+      ================================================== -->
+      <section id="projects" class="section container">
+         <h2 class="section-title"><span class="mono">~/</span>projects</h2>
+
+         <h3 class="subsection-title mono">// at work</h3>
+         <article id="project-aks-platform" class="card project featured">
+            <div class="project-head">
+               <h3>Multi-Cloud GitOps Kubernetes Platform on AKS &amp; EKS</h3>
+               <span class="mono date">Work · Production</span>
+            </div>
+            <p>
+               A production Kubernetes platform spanning four clusters across Azure (AKS) and AWS (EKS) and hosting dozens of
+               applications. It combines GitOps deployments, automated TLS and DNS, Gateway API ingress, and an on-demand
+               preview environment for every pull request.
+            </p>
+
+            <div class="arch" aria-label="Platform architecture diagram">
+               <div class="arch-row">
+                  <span class="node">Pull request</span><span class="edge">&rarr;</span>
+                  <span class="node">GitHub Actions <small>build + Trivy scan</small></span><span class="edge">&rarr;</span>
+                  <span class="node">ArgoCD ApplicationSet</span><span class="edge">&rarr;</span>
+                  <span class="node accent">Preview env <small>per PR</small></span>
+               </div>
+               <div class="arch-row">
+                  <span class="node">Merge to main</span><span class="edge">&rarr;</span>
+                  <span class="node">ArgoCD <small>GitOps sync</small></span><span class="edge">&rarr;</span>
+                  <span class="node accent">AKS + EKS clusters <small>production</small></span>
+               </div>
+               <div class="arch-row">
+                  <span class="node">ExternalDNS <small>DNS records</small></span>
+                  <span class="node">cert-manager <small>TLS certs</small></span>
+                  <span class="node">NGINX Gateway Fabric <small>Gateway API</small></span><span class="edge">&rarr;</span>
+                  <span class="node accent">Services</span>
+               </div>
             </div>
 
-            <div class="nine columns main-col">
-
-               <div class="row item">
-
-                  <div class="twelve columns">
-
-                     <h3>Cloud Resume</h3>
-                     <h6>Overview</h6>
-                     <p>This project is a Dockerized Flask application that serves a web page and tracks the number of visitors using an AWS Lambda function. The application runs in a Docker container, ensuring a consistent runtime environment.</p>
-                     <h6>Infrastructure Overview</h6>
-                     <p>The application is deployed on AWS using Fargate with infrastructure managed by Terraform. Key components include:
-                     <li>Dockerized Flask Application</li>
-                     <li>AWS Elastic Container Registry (ECR)</li>
-                     <li>AWS Fargate for container orchestration</li>
-                     <li>AWS Application Load Balancer</li>
-                     <li>AWS Route 53 for DNS management</li>
-                     <li>AWS Lambda and API Gateway for backend processes and API management</li>
-                     <a href="https://github.com/shabbirnayeem/aws-resume">
-                        <img src="https://img.shields.io/badge/Review%20the%20Code-black?logo=github" alt="GitHub" style="vertical-align: middle;">
-                      </a>
-                     </p>
-                  </div>
-
-               </div> <!-- item end -->
-
-               <div class="row item">
-
-                  <div class="twelve columns">
-
-                     <h3>Automated Kubernetes Cluster Deployment in AWS</h3>
-                     <h6>Overview</h6>
-                     <p>Developed a guide and resource repository for building Kubernetes (K8s) clusters from scratch in AWS. This project includes detailed instructions and necessary files for setting up and configuring K8s deployments and services using Terraform and Ansible. Terraform automates the creation of infrastructure in AWS, while Ansible handles the configuration of worker and master nodes. With a single terraform apply command, users can deploy a fully functional Kubernetes cluster in AWS.</p>
-                     <p>
-                        <a href="https://gitlab.com/shabbirnayeem/kubernetes-learn/-/tree/main/build-k8-cluster">
-                           <img src="https://img.shields.io/badge/Review%20the%20Code-orange?logo=gitlab" alt="GitLab" style="vertical-align: middle;">
-                        </a>
-                     </p>
-                      
-                  </div>
-
-               </div> <!-- item end -->
-
-               <div class="row item">
-
-                  <div class="twelve columns">
-
-                     <h3>Image Analysis with Azure Cognitive Services</h3>
-                     <h6>Overview</h6>
-                     <p>This project uses Azure Cognitive Services to analyze images. It includes features for generating captions and extracting text from images. </p>
-                     <p>
-                        <a href="https://github.com/shabbirnayeem/challenge-project-cloud-ai">
-                           <img src="https://img.shields.io/badge/Review%20the%20Code-black?logo=github" alt="GitHub" style="vertical-align: middle;">
-                        </a>
-                     </p>
-                  </div>
-
-               </div> <!-- item end -->
-
-               <div class="row item">
-
-                  <div class="twelve columns">
-
-                  </div>
-
-               </div> <!-- item end -->
-
-            </div> <!-- main-col end -->
-
-         </div> <!-- End Project -->
-      </section> <!-- Project Section End-->
-
-   </section> <!-- Resume Section End-->
-
-   
-   <!-- footer
-   ================================================== -->
-   <footer>
-
-      <div class="row">
-
-         <div class="twelve columns">
-
-            <!-- <ul class="social-links">
-               <li><a href=""><i class="fa fa-twitter"></i></a></li>
-               <li><a href=""><i class="fa fa-external-link"></i></a></li>
-               <li><a href="https://www.linkedin.com/in/shabbir-nayeem/"><i class="fa fa-linkedin"></i></a></li>
-               <li><a href="https://gitlab.com/shabbirnayeem"><i class="fa fa-gitlab"></i></a></li>
-               <li><a href="https://github.com/shabbirnayeem"><i class="fa fa-github"></i></a></li>
-            </ul> -->
-            <ul class="social-links">
-               <li><a href=""><i class="fab fa-twitter"></i></a></li>
-               <!-- <li><a href=""><i class="fa fa-external-link"></i></a></li> -->
-               <li><a href="https://www.linkedin.com/in/shabbir-nayeem/"><i class="fab fa-linkedin"></i></a></li>
-               <li><a href="https://gitlab.com/shabbirnayeem"><i class="fab fa-gitlab"></i></a></li>
-               <li><a href="https://github.com/shabbirnayeem"><i class="fab fa-github"></i></a></li>
+            <ul class="decisions">
+               <li><b>Infrastructure as code:</b> the clusters and their node pools, including the GPU pools, are provisioned with Terraform, so the platform itself is reviewed and reproducible like any other code.</li>
+               <li><b>GitOps with ArgoCD:</b> Git is the source of truth, so every deployment is reviewed, auditable, and easy to roll back.</li>
+               <li><b>Preview environments:</b> GitHub Actions and ArgoCD ApplicationSets deploy an isolated environment for each pull request, so changes are tested before they merge.</li>
+               <li><b>Security in the pipeline:</b> Trivy scans run in CI, so vulnerabilities are caught before they reach a cluster.</li>
+               <li><b>Self-service TLS and DNS:</b> cert-manager and ExternalDNS issue certificates and create records automatically, so a new service gets an HTTPS hostname without a ticket.</li>
+               <li><b>Gateway API ingress:</b> NGINX Gateway Fabric gives teams standard, role-oriented routing.</li>
+               <li><b>GPU workloads for AI:</b> autoscaling GPU node pools serve the AI team. Taints and tolerations keep GPU nodes reserved for GPU workloads, so expensive capacity isn't spent on ordinary pods.</li>
+               <li><b>Progressive delivery (in progress):</b> adopting Argo Rollouts so releases roll out gradually instead of all at once.</li>
+               <li><b>Result:</b> 4 production clusters serving dozens of applications, all deployed through Git.</li>
             </ul>
-      
-            <ul class="copyright">
-               <a href="https://www.styleshout.com/free-templates/ceevee/"> Template by CeeVee </a>
-                
+            <ul class="tags">
+               <li>AKS</li><li>EKS</li><li>Terraform</li><li>ArgoCD</li><li>Argo Rollouts</li><li>ApplicationSets</li><li>GitHub Actions</li><li>Trivy</li><li>cert-manager</li><li>ExternalDNS</li><li>NGINX Gateway Fabric</li>
             </ul>
+         </article>
 
+         <article id="project-client-sso" class="card project featured">
+            <div class="project-head">
+               <h3>Client SSO Onboarding</h3>
+               <span class="mono date">30+ clients</span>
+            </div>
+            <p>
+               A repeatable way to connect each client's identity provider to our platform. A Terraform module adds the
+               client's IdP to AWS Cognito, and the client then confirms the connection works with SSO Checker, which runs
+               on AKS. More than 30 clients have been onboarded this way instead of through manual console setup.
+            </p>
+
+            <div class="arch" aria-label="Client SSO onboarding flow">
+               <div class="arch-row">
+                  <span class="node">Terraform module <small>per client</small></span><span class="edge">&rarr;</span>
+                  <span class="node">AWS Cognito <small>client IdP added</small></span><span class="edge">&rarr;</span>
+                  <span class="node">SSO Checker <small>SAML 2.0 sign-in test</small></span><span class="edge">&rarr;</span>
+                  <span class="node accent">Pass / fail</span>
+               </div>
+            </div>
+
+            <ul class="decisions">
+               <li><b>Module, not console:</b> every client is configured the same way, reviewed in a pull request, and easy to reproduce.</li>
+               <li><b>Self-service verification:</b> clients test their own SSO connection and get a clear pass or fail, so there is less back-and-forth with support.</li>            </ul>
+            <ul class="tags">
+               <li>Terraform modules</li><li>AWS Cognito</li><li>SAML 2.0</li><li>SSO</li><li>AKS</li>
+            </ul>
+         </article>
+
+         <div class="grid grid-2">
+            <article class="card project">
+               <div class="project-head">
+                  <h3>Self-Service Team Onboarding Module</h3>
+                  <span class="mono date">Terraform</span>
+               </div>
+               <p>
+                  A Terraform module that gives each team everything it needs to deploy: a Key Vault, a container registry
+                  (ACR or ECR), Git repositories, an Entra ID group, and an ArgoCD project. Access is scoped so each team
+                  can reach only its own project and namespace.
+               </p>
+               <ul class="tags"><li>Terraform modules</li><li>Key Vault</li><li>ACR / ECR</li><li>Entra ID</li><li>ArgoCD RBAC</li><li>Multi-tenancy</li></ul>
+            </article>
+
+            <article class="card project">
+               <div class="project-head">
+                  <h3>Terraform PR Automation with Atlantis</h3>
+                  <span class="mono date">Production</span>
+               </div>
+               <p>
+                  Teams plan and apply Terraform from pull-request comments, with the plan posted to the PR for review before
+                  anything changes. Originally deployed on ECS, it was later migrated onto the AKS platform.
+               </p>
+               <ul class="tags"><li>Atlantis</li><li>Terraform</li><li>ECS</li><li>AKS</li></ul>
+            </article>
+
+            <article class="card project">
+               <div class="project-head">
+                  <h3>Atlantis MCP Server</h3>
+                  <span class="mono date">In progress</span>
+               </div>
+               <p>
+                  Developing an MCP server that lets AI assistants work with Atlantis, with Open Policy Agent
+                  policies enforcing what they are allowed to do.
+               </p>
+               <ul class="tags"><li>MCP</li><li>Atlantis</li><li>Open Policy Agent</li><li>Terraform</li></ul>
+            </article>
+
+            <article class="card project">
+               <div class="project-head">
+                  <h3>SFTP Helper</h3>
+                  <span class="mono date">Internal tool</span>
+               </div>
+               <p>
+                  An internal web app for managing SFTP server users in AWS Cognito, so the team can handle them without
+                  going through the AWS console. It runs on the AKS platform.
+               </p>
+               <ul class="tags"><li>AWS Cognito</li><li>SFTP</li><li>AKS</li></ul>
+            </article>
          </div>
 
-         <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#home"><i class="icon-up-open"></i></a></div>
+         <h3 class="subsection-title mono">// personal</h3>
+         <article id="project-cloud-resume" class="card project featured">
+            <div class="project-head">
+               <h3>This site: Self-hosted on a Raspberry Pi, with a serverless backend on AWS</h3>
+               <a class="link" href="https://github.com/shabbirnayeem/aws-resume"><i class="fab fa-github"></i> Source</a>
+            </div>
+            <p>
+               A containerized Flask app runs on a Raspberry Pi and is exposed to the internet through a Cloudflare Tunnel.
+               The visitor counter is serverless on AWS (API Gateway, Lambda, DynamoDB) and provisioned with Terraform,
+               with remote state in S3.
+            </p>
 
-      </div>
+            <div class="arch" aria-label="Architecture diagram">
+               <div class="arch-row">
+                  <span class="node">Browser</span><span class="edge">&rarr;</span>
+                  <span class="node">Cloudflare <small>DNS + TLS</small></span><span class="edge">&rarr;</span>
+                  <span class="node">Cloudflare Tunnel <small>outbound only</small></span><span class="edge">&rarr;</span>
+                  <span class="node accent">Raspberry Pi <small>Flask container</small></span>
+               </div>
+               <div class="arch-row">
+                  <span class="node">Browser</span><span class="edge">&rarr;</span>
+                  <span class="node">API Gateway</span><span class="edge">&rarr;</span>
+                  <span class="node">Lambda <small>Python</small></span><span class="edge">&rarr;</span>
+                  <span class="node accent">DynamoDB</span>
+               </div>
+               <div class="arch-row">
+                  <span class="node">git push</span><span class="edge">&rarr;</span>
+                  <span class="node">GitHub Actions</span><span class="edge">&rarr;</span>
+                  <span class="node">Docker Hub <small>amd64 / arm64</small></span><span class="edge">&rarr;</span>
+                  <span class="node accent">Self-hosted runner on the Pi <small>deploy + health check</small></span>
+               </div>
+            </div>
 
-   </footer> <!-- Footer End-->
+            <ul class="decisions">
+               <li><b>Cloudflare Tunnel:</b> the Pi opens no inbound ports on the home network. The tunnel is an outbound-only connection, and TLS terminates at Cloudflare's edge.</li>
+               <li><b>Multi-arch images:</b> GitHub Actions builds for both arm64 and amd64, so the same image runs on the Pi and on cloud hosts.</li>
+               <li><b>Hybrid by design:</b> the web tier costs almost nothing to self-host, and the counter API on Lambda costs pennies and is decoupled from the web tier.</li>
+               <li><b>Cost-driven migration:</b> the site originally ran on ECS Fargate behind an ALB, which cost about $50 a month for a single small container. Moving it to a Pi cut hosting to near zero. The Fargate Terraform is still in the repo.</li>
+               <li><b>Automated deploys with rollback:</b> a self-hosted GitHub Actions runner on the Pi deploys each commit's image, checks <code>/healthz</code>, and rolls back to the previous version if the check fails.</li>
+               <li><b>Runner security:</b> the repo is public, so only pushes to <code>main</code> can reach the Pi's runner. Builds run on GitHub-hosted runners, and fork pull requests need approval.</li>
+            </ul>
+            <ul class="tags">
+               <li>Raspberry Pi</li><li>Docker</li><li>Cloudflare Tunnel</li><li>GitHub Actions</li><li>Self-hosted runner</li><li>Lambda</li><li>DynamoDB</li><li>Terraform</li>
+            </ul>
+         </article>
 
-   <!-- Java Script
-   ================================================== -->
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-   <script>window.jQuery || document.write('<script src="static/js/jquery-1.10.2.min.js"><\/script>')</script>
-   <script type="text/javascript" src="static/js/jquery-migrate-1.2.1.min.js"></script>
+         <div class="grid grid-2">
+            <article class="card project">
+               <div class="project-head">
+                  <h3>Kubernetes Cluster from Scratch on AWS</h3>
+                  <a class="link" href="https://gitlab.com/shabbirnayeem/kubernetes-learn/-/tree/main/build-k8-cluster"><i class="fab fa-gitlab"></i> Source</a>
+               </div>
+               <p>
+                  A single <code>terraform apply</code> builds a working Kubernetes cluster. Terraform provisions the AWS
+                  infrastructure and Ansible bootstraps the control plane and worker nodes. Comes with a step-by-step guide.
+               </p>
+               <ul class="tags"><li>Kubernetes</li><li>Terraform</li><li>Ansible</li><li>AWS</li></ul>
+            </article>
 
-   <script src="static/js/jquery.flexslider.js"></script>
-   <script src="static/js/waypoints.js"></script>
-   <script src="static/js/jquery.fittext.js"></script>
-   <script src="static/js/magnific-popup.js"></script>
-   <script src="static/js/init.js"></script>
+            <article class="card project">
+               <div class="project-head">
+                  <h3>Image Analysis with Azure AI</h3>
+                  <a class="link" href="https://github.com/shabbirnayeem/challenge-project-cloud-ai"><i class="fab fa-github"></i> Source</a>
+               </div>
+               <p>
+                  Uses Azure Cognitive Services to generate image captions and extract text (OCR) from uploaded images.
+               </p>
+               <ul class="tags"><li>Azure</li><li>Cognitive Services</li><li>Python</li></ul>
+            </article>
 
+            <article class="card project">
+               <div class="project-head">
+                  <h3>Observability &amp; SLOs for this site</h3>
+                  <span class="mono date">In progress</span>
+               </div>
+               <p>
+                  Adding SRE practices to this site: Prometheus and Grafana for the Pi and its container,
+                  CloudWatch alarms for the Lambda API, and an availability SLO whose burn-rate alerts page through PagerDuty.
+               </p>
+               <ul class="tags"><li>CloudWatch</li><li>Prometheus</li><li>Grafana</li><li>PagerDuty</li><li>SLOs</li></ul>
+            </article>
+         </div>
+      </section>
+
+      <!-- Skills
+      ================================================== -->
+      <section id="skills" class="section container">
+         <h2 class="section-title"><span class="mono">~/</span>skills</h2>
+         <div class="grid grid-3">
+            <div class="card skill-group">
+               <h3><i class="fas fa-cloud"></i> Cloud</h3>
+               <ul class="tags"><li>AWS</li><li>Azure</li><li>Cloudflare</li><li>IAM</li><li>Networking</li></ul>
+            </div>
+            <div class="card skill-group">
+               <h3><i class="fas fa-code-branch"></i> Infrastructure as Code</h3>
+               <ul class="tags"><li>Terraform</li><li>Terraform modules</li><li>Atlantis</li><li>Open Policy Agent</li><li>Ansible</li></ul>
+            </div>
+            <div class="card skill-group">
+               <h3><i class="fas fa-cubes"></i> Containers &amp; Orchestration</h3>
+               <ul class="tags"><li>Kubernetes (CKA, CKAD)</li><li>AKS</li><li>EKS</li><li>GPU workloads</li><li>Docker</li><li>ECS / Fargate</li><li>Gateway API</li><li>cert-manager</li><li>ExternalDNS</li></ul>
+            </div>
+            <div class="card skill-group">
+               <h3><i class="fas fa-sync-alt"></i> CI/CD &amp; GitOps</h3>
+               <ul class="tags"><li>ArgoCD</li><li>Argo Rollouts</li><li>GitHub Actions</li><li>GitLab CI</li><li>Jenkins</li><li>Trivy</li></ul>
+            </div>
+            <div class="card skill-group">
+               <h3><i class="fas fa-heartbeat"></i> Observability &amp; Reliability</h3>
+               <ul class="tags"><li>Prometheus</li><li>Grafana</li><li>CloudWatch</li><li>PagerDuty</li></ul>
+            </div>
+            <div class="card skill-group">
+               <h3><i class="fas fa-terminal"></i> Scripting &amp; Systems</h3>
+               <ul class="tags"><li>Python</li><li>Bash</li><li>PowerShell</li><li>Linux</li></ul>
+            </div>
+         </div>
+      </section>
+
+      <!-- Experience
+      ================================================== -->
+      <section id="experience" class="section container">
+         <h2 class="section-title"><span class="mono">~/</span>experience</h2>
+         <ol class="timeline">
+            <li>
+               <div class="tl-head">
+                  <h3>DevOps Engineer · MediaRadar</h3>
+                  <span class="mono date">Nov 2023 – Present</span>
+               </div>
+               <ul>
+                  <li>Deployed and operate a multi-cloud Kubernetes platform of 4 production clusters across AKS and EKS, hosting dozens of applications, with clusters and node pools provisioned in Terraform.</li>
+                  <li>Introduced GitOps with ArgoCD and built per-pull-request preview environments using GitHub Actions and ArgoCD ApplicationSets, with Trivy security scanning in CI.</li>
+                  <li>Created a self-service Terraform module that onboards each team with a Key Vault, ACR/ECR registry, repositories, Entra ID group, and an ArgoCD project scoped to its namespace.</li>
+                  <li>Automated SSO onboarding for 30+ clients with a Terraform module that configures their identity providers in AWS Cognito, and worked on SSO Checker for SAML connection testing.</li>
+                  <li>Automated ingress, TLS and DNS with NGINX Gateway Fabric, cert-manager and ExternalDNS.</li>
+                  <li>Provisioned autoscaling GPU node pools for the AI team, using taints and tolerations to isolate GPU workloads.</li>
+                  <li>Operated Atlantis for pull-request-driven Terraform workflows and migrated it from ECS to AKS. Built SFTP Helper, an internal app for managing SFTP users in Cognito.</li>
+                  <li>Currently rolling out progressive delivery with Argo Rollouts and developing an MCP server for Atlantis with Open Policy Agent policy enforcement.</li>
+               </ul>
+            </li>
+            <li>
+               <div class="tl-head">
+                  <h3>Systems Engineer, DevOps / Infrastructure · Numerator</h3>
+                  <span class="mono date">Aug 2022 – Aug 2023</span>
+               </div>
+               <ul>
+                  <li>Administered Azure infrastructure and automated deployments with Terraform and Ansible.</li>
+                  <li>Operated and supported Kubernetes clusters.</li>
+               </ul>
+            </li>
+            <li>
+               <div class="tl-head">
+                  <h3>Associate System Administrator · Schrödinger</h3>
+                  <span class="mono date">Aug 2021 – Aug 2022</span>
+               </div>
+               <ul>
+                  <li>Administered Linux, macOS and Windows systems and automated tasks with Python and Bash.</li>
+                  <li>Ran identity infrastructure (Okta, SAML, LDAP, AD) and the Atlassian suite.</li>
+               </ul>
+            </li>
+            <li>
+               <div class="tl-head">
+                  <h3>Help Desk Analyst · National Debt Relief</h3>
+                  <span class="mono date">Nov 2018 – Aug 2021</span>
+               </div>
+               <ul>
+                  <li>Administered AWS, O365 and Salesforce, and automated repetitive work with PowerShell.</li>
+               </ul>
+            </li>
+            <li>
+               <div class="tl-head">
+                  <h3>IT Support Intern · Independence Care System</h3>
+                  <span class="mono date">Jul 2017 – Nov 2018</span>
+               </div>
+            </li>
+         </ol>
+      </section>
+
+      <!-- Certifications
+      ================================================== -->
+      <section id="certifications" class="section container">
+         <h2 class="section-title"><span class="mono">~/</span>certs</h2>
+         <div class="grid grid-certs">
+            <div class="card cert"><i class="fas fa-dharmachakra"></i><div><h3>Kubernetes and Cloud Native Security Associate (KCSA)</h3><p class="mono date">Feb 2026</p></div></div>
+            <div class="card cert"><i class="fas fa-dharmachakra"></i><div><h3>Kubernetes and Cloud Native Associate (KCNA)</h3><p class="mono date">Dec 2025</p></div></div>
+            <div class="card cert"><i class="fas fa-dharmachakra"></i><div><h3>Certified Kubernetes Application Developer (CKAD)</h3><p class="mono date">Nov 2025</p></div></div>
+            <div class="card cert"><i class="fas fa-dharmachakra"></i><div><h3>Certified Kubernetes Administrator (CKA)</h3><p class="mono date">Oct 2025</p></div></div>
+            <div class="card cert"><i class="fab fa-aws"></i><div><h3>AWS Certified Solutions Architect</h3><p class="mono date">Oct 2020</p></div></div>
+            <div class="card cert"><i class="fab fa-microsoft"></i><div><h3>Azure Fundamentals (AZ-900)</h3><p class="mono date">Jan 2021</p></div></div>
+            <div class="card cert"><i class="fab fa-linux"></i><div><h3>CompTIA Linux+</h3><p class="mono date">Jan 2020</p></div></div>
+            <div class="card cert"><i class="fas fa-network-wired"></i><div><h3>Cisco CCNA Routing &amp; Switching</h3><p class="mono date">Mar 2018</p></div></div>
+         </div>
+      </section>
+
+      <!-- Contact
+      ================================================== -->
+      <section id="contact" class="section container contact">
+         <h2 class="section-title"><span class="mono">~/</span>contact</h2>
+         <p class="lead">Open to conversations about DevOps, SRE and platform engineering roles.</p>
+         <div class="cta">
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/shabbir-nayeem/"><i class="fab fa-linkedin"></i> Message me on LinkedIn</a>
+            <a class="btn" href="https://github.com/shabbirnayeem"><i class="fab fa-github"></i> GitHub</a>
+            <a class="btn" href="https://gitlab.com/shabbirnayeem"><i class="fab fa-gitlab"></i> GitLab</a>
+         </div>
+      </section>
+   </main>
+
+   <footer class="container footer mono">
+      <span>&copy; <span id="year"></span> Shabbir Nayeem</span>
+      <span>served from a Raspberry Pi via Cloudflare Tunnel</span>
+   </footer>
+
+   <script src="/static/js/portfolio.js"></script>
 </body>
-
 </html>

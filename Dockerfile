@@ -1,20 +1,23 @@
-# Use an official Python runtime as a parent image
-FROM python:3.8-slim
+FROM python:3.12-slim
 
-# Set the working directory in the container
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Install dependencies first so code changes don't invalidate this layer
+COPY app/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install any needed packages specified in requirements.txt
-RUN pip3 install --no-cache-dir -r app/requirements.txt
+COPY app/ .
 
+# Run as an unprivileged user
+RUN useradd --create-home --uid 10001 appuser
+USER appuser
 
-# Make port 5000 available to the world outside this container
 EXPOSE 9123
 
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9123/healthz', timeout=2)"
 
-ENTRYPOINT [ "python" ]
-
-CMD [ "app/app.py" ]
+CMD ["gunicorn", "--bind", "0.0.0.0:9123", "--workers", "2", "--access-logfile", "-", "app:app"]
