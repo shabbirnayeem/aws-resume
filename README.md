@@ -1,28 +1,66 @@
-# aws-resume
+# Portfolio site
 
-This project is my Cloud Resume Challenge, hosted on AWS. The static website, developed using HTML, CSS, JavaScript, and Python Flask, is deployed on AWS ECS with Docker images created using Dockerfile. It features a visitor counter implemented with AWS Lambda functions. The backend is powered by Python, and data is stored in an AWS DynamoDB database. Infrastructure as code is managed using Terraform.
-## Pre-requisites
+[![Test, Build and Deploy](https://github.com/shabbirnayeem/aws-resume/actions/workflows/docker-image-ci.yml/badge.svg)](https://github.com/shabbirnayeem/aws-resume/actions/workflows/docker-image-ci.yml)
 
-Before getting started with this project, make sure you have the following:
+My DevOps / platform engineering portfolio. The site itself is a small hybrid-infrastructure project: a Flask
+container self-hosted on a Raspberry Pi behind a Cloudflare Tunnel, plus a serverless visitor counter on AWS.
 
-- AWS account
-- Docker
-- Basic knowledge of HTML, CSS, and JavaScript
-- Familiarity with AWS services such as ECS, Lambda, and DynamoDB
+## Architecture
 
-## Structure
+```
+Browser ──► Cloudflare (DNS + TLS) ──► Cloudflare Tunnel ──► Raspberry Pi: Flask + gunicorn container
+Browser ──► API Gateway ──► Lambda (Python) ──► DynamoDB          (visitor counter, Terraform-managed)
 
-The project has the following structure:
+git push ──► GitHub Actions: tests ──► multi-arch image (amd64/arm64) ──► Docker Hub
+                                                      └──► self-hosted runner on the Pi: deploy + health check + rollback
+```
 
-- `index.html`: The main HTML file for the static website.
-- `style.css`: The CSS file for styling the website.functionality.
-- `lambda_function.py`: The Python code for the visitor counter Lambda function.
-- `README.md`: This file, providing project documentation and instructions.
-- `terraform`: Contain's the AWS infrastcure.
-- `Dockerfile`: Configuration for docker image.
-- `dicker-image-ci.yml`: Build and push docker image to Dockerhub using github action.
+- **No open ports at home.** The Pi connects outbound to Cloudflare, and the container listens only on `127.0.0.1`.
+- **Automated deploys with rollback.** Every push to `main` is tested, built, tagged with its commit SHA and rolled
+  out by [deploy/deploy.sh](deploy/deploy.sh). If `/healthz` doesn't come up, the previous image is restored.
+- **Cost.** The site started on ECS Fargate behind an ALB (about $50 a month). Moving it to a Pi brought hosting to
+  near zero. The original Fargate Terraform is still in [terraform/](terraform/) for reference.
 
-## Credit
-I am not a designer, so I used this template to create my site.
-https://styleshout.com/free-templates/ceevee/
+## Repository layout
 
+| Path | What it is |
+|---|---|
+| [app/](app/) | Flask app: `app.py`, the page template, and static CSS/JS/images |
+| [Dockerfile](Dockerfile) | Python 3.12 image running gunicorn as a non-root user, with a health check |
+| [deploy/](deploy/) | Compose file, deploy/rollback script, and the [runner setup guide](deploy/README.md) |
+| [terraform/](terraform/) | Visitor counter (API Gateway, Lambda, DynamoDB, IAM) and the legacy ECS/ALB setup |
+| [tests/](tests/) | pytest tests for the Flask app and the Lambda |
+| [.github/workflows/](.github/workflows/) | CI/CD: test on every push and PR; build and deploy from `main` |
+
+## Run it locally
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements-dev.txt
+
+# Dev server with auto-reload on http://localhost:9123
+cd app && FLASK_DEBUG=1 python app.py
+
+# Tests (from the repo root)
+pytest
+```
+
+Or run the production container:
+
+```bash
+docker build -t portfolio-app .
+docker run --rm -p 9123:9123 portfolio-app
+```
+
+The visitor counter shows "n/a" locally, because the API only allows browser requests from the live domain.
+
+## Visitor counter
+
+The Lambda increments the count with DynamoDB's atomic `ADD`, so concurrent visits are never lost, and returns
+`{"count": N}`. Changes deploy with `terraform apply` in [terraform/](terraform/), which repackages the function
+automatically.
+
+## Credits
+
+Page design and code are my own. The site originally used the
+[CeeVee template by StyleShout](https://styleshout.com/free-templates/ceevee/).

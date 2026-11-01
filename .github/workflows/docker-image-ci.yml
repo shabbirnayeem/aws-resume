@@ -1,17 +1,45 @@
-name: Docker Image CI
+name: Test, Build and Deploy
 
 on:
   push:
     branches: [ "main" ]
+  pull_request:
   workflow_dispatch:
 
 jobs:
-  build-and-push:
+  test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Run tests
+        run: pytest -v
+
+  build-and-push:
+    needs: test
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.vars.outputs.tag }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set image tag
+        id: vars
+        run: echo "tag=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -30,8 +58,32 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-app:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-app:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-app:${{ steps.vars.outputs.tag }}
           platforms: linux/amd64,linux/arm64
 
       - name: Logout from Docker Hub
         run: docker logout
+
+  # Runs on the self-hosted runner on the Raspberry Pi (see deploy/README.md).
+  # Pull requests stop after the test job and never reach the Pi.
+  deploy:
+    needs: build-and-push
+    if: github.event_name != 'pull_request'
+    runs-on: [self-hosted, pi]
+    environment: production
+    # Never run two deploys to the Pi at the same time
+    concurrency:
+      group: deploy-pi
+      cancel-in-progress: false
+    env:
+      IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-app
+      IMAGE_TAG: ${{ needs.build-and-push.outputs.tag }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to the Pi
+        run: ./deploy/deploy.sh

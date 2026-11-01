@@ -1,0 +1,17 @@
+services:
+  web:
+    image: ${IMAGE:?IMAGE is required}:${IMAGE_TAG:-latest}
+    container_name: portfolio-web
+    restart: unless-stopped
+    # Localhost only, for deploy.sh's health check; public traffic arrives over the tunnel network
+    ports:
+      - "127.0.0.1:${HOST_PORT:-9123}:9123"
+    networks:
+      - default
+      - tunnel
+
+networks:
+  # Shared with the cloudflared container, which forwards to http://portfolio-web:9123
+  tunnel:
+    name: tunnel
+    external: true

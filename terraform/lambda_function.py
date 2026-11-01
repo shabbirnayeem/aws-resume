@@ -1,36 +1,19 @@
+import os
+
 import boto3
-import json
+
+# Created once per container and reused across invocations
+table = boto3.resource('dynamodb').Table(os.environ.get('TABLE_NAME', 'VisitorCount'))
+
 
 def lambda_handler(event, context):
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('VisitorCount')
-    
-    # Get the current count
-    response = table.get_item(Key={'id': 'counter'})
-    current_count = response['Item']['count']
-
-    # Convert Decimal to int
-    current_count = int(current_count)
-
-    print(current_count)
-    
-    # Increment the count
-    new_count = current_count + 1
-    table.update_item(
+    # ADD is atomic, so concurrent visits can't overwrite each other's increment
+    response = table.update_item(
         Key={'id': 'counter'},
-        UpdateExpression='SET #count = :val1',
+        UpdateExpression='ADD #count :inc',
         ExpressionAttributeNames={'#count': 'count'},
-        ExpressionAttributeValues={':val1': new_count}
+        ExpressionAttributeValues={':inc': 1},
+        ReturnValues='UPDATED_NEW',
     )
-    updated_counter = response['Item']['count']
-    print(updated_counter)
-    return {
-        'statusCode': 200,
-        'headers': {
-            'Access-Control-Allow-Origin': '*'
-        },
-        'body': json.dumps({'count': new_count})
-    }
-
-
-lambda_handler(None, None)
+    # API Gateway uses a non-proxy integration, so this dict is returned as the response body
+    return {'count': int(response['Attributes']['count'])}
