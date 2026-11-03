@@ -1,0 +1,12 @@
+name: Test ARC
+on:
+  push:
+    branches: [ "deploying-app-via-k3" ]
+  workflow_dispatch:
+
+jobs:
+    test:
+        runs-on: [pi-k3s]
+        steps:
+            - name: ARC Test
+              run: "hostname && whoami"
