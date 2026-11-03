@@ -1,0 +1,13 @@
+githubConfigUrl: https://github.com/shabbirnayeem/aws-resume
+githubConfigSecret: github-app
+
+minRunners: 0                   
+maxRunners: 1
+
+template:
+  spec:
+    serviceAccountName: portfolio-deployer
+    containers:
+      - name: runner
+        image: ghcr.io/actions/actions-runner:latest
+        command: ["/home/runner/run.sh"]
