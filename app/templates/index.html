@@ -41,7 +41,7 @@
             <p class="eyebrow mono">DevOps Engineer &rarr; Platform / SRE</p>
             <h1>Hi, I'm Shabbir. I build reliable cloud platforms.</h1>
             <p class="lead">
-               DevOps Engineer at <a href="https://mediaradar.com/">MediaRadar</a>, where I run a multi-cloud Kubernetes
+               DevOps Engineer II at <a href="https://mediaradar.com/">MediaRadar</a>, where I run a multi-cloud Kubernetes
                platform on AKS and EKS and use Terraform and ArgoCD to give teams self-service ways to deploy their apps.
                Growing into SRE and platform engineering.
             </p>
@@ -59,7 +59,7 @@
       <section class="container">
          <div class="status-strip mono" aria-label="Site status">
             <span><span class="dot"></span> live</span>
-            <span>host: <b>Raspberry Pi</b></span>
+            <span>host: <b>k3s on Raspberry Pi</b></span>
             <span>ingress: <b>Cloudflare Tunnel</b></span>
             <span>api: <b>AWS Lambda</b></span>
             <span>visitors: <b id="counter">&hellip;</b></span>
@@ -202,11 +202,12 @@
          <h3 class="subsection-title mono">// personal</h3>
          <article id="project-cloud-resume" class="card project featured">
             <div class="project-head">
-               <h3>This site: Self-hosted on a Raspberry Pi, with a serverless backend on AWS</h3>
+               <h3>This site: Kubernetes on a Raspberry Pi, with a serverless backend on AWS</h3>
                <a class="link" href="https://github.com/shabbirnayeem/aws-resume"><i class="fab fa-github"></i> Source</a>
             </div>
             <p>
-               A containerized Flask app runs on a Raspberry Pi and is exposed to the internet through a Cloudflare Tunnel.
+               A containerized Flask app runs on a single-node k3s cluster on a Raspberry Pi and is exposed to the internet
+               through a Cloudflare Tunnel. Deploys run on ephemeral GitHub Actions runners inside the same cluster.
                The visitor counter is serverless on AWS (API Gateway, Lambda, DynamoDB) and provisioned with Terraform,
                with remote state in S3.
             </p>
@@ -215,8 +216,8 @@
                <div class="arch-row">
                   <span class="node">Browser</span><span class="edge">&rarr;</span>
                   <span class="node">Cloudflare <small>DNS + TLS</small></span><span class="edge">&rarr;</span>
-                  <span class="node">Cloudflare Tunnel <small>outbound only</small></span><span class="edge">&rarr;</span>
-                  <span class="node accent">Raspberry Pi <small>Flask container</small></span>
+                  <span class="node">cloudflared pod <small>outbound-only tunnel</small></span><span class="edge">&rarr;</span>
+                  <span class="node accent">k3s on Raspberry Pi <small>Flask Deployment</small></span>
                </div>
                <div class="arch-row">
                   <span class="node">Browser</span><span class="edge">&rarr;</span>
@@ -228,24 +229,38 @@
                   <span class="node">git push</span><span class="edge">&rarr;</span>
                   <span class="node">GitHub Actions</span><span class="edge">&rarr;</span>
                   <span class="node">Docker Hub <small>amd64 / arm64</small></span><span class="edge">&rarr;</span>
-                  <span class="node accent">Self-hosted runner on the Pi <small>deploy + health check</small></span>
+                  <span class="node">ARC runner pod <small>one per job</small></span><span class="edge">&rarr;</span>
+                  <span class="node accent">Rolling update <small>auto rollback</small></span>
                </div>
             </div>
 
             <ul class="decisions">
-               <li><b>Cloudflare Tunnel:</b> the Pi opens no inbound ports on the home network. The tunnel is an outbound-only connection, and TLS terminates at Cloudflare's edge.</li>
+               <li><b>No inbound ports:</b> cloudflared runs as a pod and reaches the site by its Kubernetes Service name. The tunnel is an outbound-only connection, and TLS terminates at Cloudflare's edge.</li>
+               <li><b>Deploys on ephemeral runners:</b> each deploy runs on a short-lived runner pod inside the cluster that can update only the site's Deployment (see <a href="#project-arc-runners">Ephemeral GitHub Actions Runners</a> below). Production deploys wait for manual approval, and pull requests never reach the cluster.</li>
+               <li><b>Zero-downtime rollouts:</b> readiness probes on <code>/healthz</code> keep traffic on the old pod until the new one is healthy. If a rollout doesn't finish within two minutes, the pipeline rolls it back and fails the job.</li>
                <li><b>Multi-arch images:</b> GitHub Actions builds for both arm64 and amd64, so the same image runs on the Pi and on cloud hosts.</li>
-               <li><b>Hybrid by design:</b> the web tier costs almost nothing to self-host, and the counter API on Lambda costs pennies and is decoupled from the web tier.</li>
-               <li><b>Cost-driven migration:</b> the site originally ran on ECS Fargate behind an ALB, which cost about $50 a month for a single small container. Moving it to a Pi cut hosting to near zero. The Fargate Terraform is still in the repo.</li>
-               <li><b>Automated deploys with rollback:</b> a self-hosted GitHub Actions runner on the Pi deploys each commit's image, checks <code>/healthz</code>, and rolls back to the previous version if the check fails.</li>
-               <li><b>Runner security:</b> the repo is public, so only pushes to <code>main</code> can reach the Pi's runner. Builds run on GitHub-hosted runners, and fork pull requests need approval.</li>
+               <li><b>Cost-driven migration:</b> the site originally ran on ECS Fargate behind an ALB, which cost about $50 a month for a single small container. Moving the web tier to a Pi cut hosting to near zero, and the counter API on Lambda costs pennies. The Fargate Terraform is still in the repo.</li>
             </ul>
             <ul class="tags">
-               <li>Raspberry Pi</li><li>Docker</li><li>Cloudflare Tunnel</li><li>GitHub Actions</li><li>Self-hosted runner</li><li>Lambda</li><li>DynamoDB</li><li>Terraform</li>
+               <li>Kubernetes (k3s)</li><li>Cloudflare Tunnel</li><li>GitHub Actions</li><li>Raspberry Pi</li><li>Lambda</li><li>DynamoDB</li><li>Terraform</li>
             </ul>
          </article>
 
          <div class="grid grid-2">
+            <article class="card project" id="project-arc-runners">
+               <div class="project-head">
+                  <h3>Ephemeral GitHub Actions Runners on Kubernetes</h3>
+                  <a class="link" href="https://github.com/shabbirnayeem/aws-resume/tree/main/k8s"><i class="fab fa-github"></i> Source</a>
+               </div>
+               <p>
+                  Self-hosted CI runners on k3s with Actions Runner Controller. Each job gets a fresh pod that is deleted
+                  when the job ends, and the pool scales to zero when idle. Runners authenticate with a GitHub App
+                  (short-lived tokens, no personal access token) and deploy through a ServiceAccount that can update one
+                  Deployment and nothing else.
+               </p>
+               <ul class="tags"><li>Actions Runner Controller</li><li>Helm</li><li>RBAC</li><li>GitHub Apps</li><li>k3s</li></ul>
+            </article>
+
             <article class="card project">
                <div class="project-head">
                   <h3>Kubernetes Cluster from Scratch on AWS</h3>
@@ -275,7 +290,7 @@
                   <span class="mono date">In progress</span>
                </div>
                <p>
-                  Adding SRE practices to this site: Prometheus and Grafana for the Pi and its container,
+                  Adding SRE practices to this site: Prometheus and Grafana for the k3s cluster on the Pi,
                   CloudWatch alarms for the Lambda API, and an availability SLO whose burn-rate alerts page through PagerDuty.
                </p>
                <ul class="tags"><li>CloudWatch</li><li>Prometheus</li><li>Grafana</li><li>PagerDuty</li><li>SLOs</li></ul>
@@ -322,8 +337,12 @@
          <ol class="timeline">
             <li>
                <div class="tl-head">
-                  <h3>DevOps Engineer · MediaRadar</h3>
-                  <span class="mono date">Nov 2023 – Present</span>
+                  <h3>DevOps Engineer II · MediaRadar</h3>
+                  <span class="mono date">Apr 2026 – Present</span>
+               </div>
+               <div class="tl-head tl-prev">
+                  <h4>DevOps Engineer</h4>
+                  <span class="mono date">Nov 2023 – Apr 2026</span>
                </div>
                <ul>
                   <li>Deployed and operate a multi-cloud Kubernetes platform of 4 production clusters across AKS and EKS, hosting dozens of applications, with clusters and node pools provisioned in Terraform.</li>
