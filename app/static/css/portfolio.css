@@ -187,6 +187,9 @@ code { font-size: .9em; background: var(--accent-soft); padding: .1em .35em; bor
 }
 .tl-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; }
 .tl-head h3 { font-size: 17px; }
+/* Earlier title at the same company, shown under the current one */
+.tl-prev { margin-top: 2px; }
+.tl-prev h4 { margin: 0; font-size: 15px; font-weight: 500; color: var(--muted); }
 .date { color: var(--muted); font-size: 13px; margin: 0; }
 .timeline ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
 
