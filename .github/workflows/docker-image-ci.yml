@@ -26,9 +26,24 @@ jobs:
       - name: Run tests
         run: pytest -v
 
-  build-and-push:
-    needs: test
+  changes:
     if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    outputs:
+      app: ${{ steps.filter.outputs.app }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            app:
+              - 'app/**'
+              - 'Dockerfile'
+
+  build-and-push:
+    needs: [test, changes]
+    if: github.event_name != 'pull_request' && needs.changes.outputs.app == 'true'
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.vars.outputs.tag }}
