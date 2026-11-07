@@ -6,7 +6,6 @@ maxRunners: 1
 
 template:
   spec:
-    serviceAccountName: portfolio-deployer
     containers:
       - name: runner
         image: ghcr.io/actions/actions-runner:latest
