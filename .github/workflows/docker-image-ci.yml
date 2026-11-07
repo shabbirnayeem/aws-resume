@@ -39,7 +39,8 @@ jobs:
 
       - name: Set image tag
         id: vars
-        run: echo "tag=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+        run: echo "tag=sha-${GITHUB_SHA::7}-${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
