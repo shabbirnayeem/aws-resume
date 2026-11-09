@@ -175,6 +175,25 @@ code { font-size: .9em; background: var(--accent-soft); padding: .1em .35em; bor
    background: var(--accent-soft); color: var(--accent);
 }
 
+/* Collapsible "read more" sections, used on project cards and experience entries */
+.card-more { margin: 4px 0 0; }
+.card-more > summary.read-more-toggle {
+   display: inline-flex; align-items: center; gap: 6px;
+   cursor: pointer; list-style: none;
+   font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--accent);
+   margin: 12px 0 10px;
+}
+.card-more > summary.read-more-toggle:hover { text-decoration: underline; }
+.card-more > summary.read-more-toggle::-webkit-details-marker { display: none; }
+.card-more > summary.read-more-toggle .chevron {
+   font-size: 11px; display: inline-block; width: 1em; text-align: center;
+   transition: transform .15s ease;
+}
+.card-more[open] > summary.read-more-toggle .chevron { transform: rotate(90deg); }
+.card-more > summary.read-more-toggle .label-less { display: none; }
+.card-more[open] > summary.read-more-toggle .label-more { display: none; }
+.card-more[open] > summary.read-more-toggle .label-less { display: inline; }
+
 .skill-group h3 i { color: var(--accent); width: 20px; }
 
 /* Experience timeline */
