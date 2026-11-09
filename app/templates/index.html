@@ -84,37 +84,40 @@
                preview environment for every pull request.
             </p>
 
-            <div class="arch" aria-label="Platform architecture diagram">
-               <div class="arch-row">
-                  <span class="node">Pull request</span><span class="edge">&rarr;</span>
-                  <span class="node">GitHub Actions <small>build + Trivy scan</small></span><span class="edge">&rarr;</span>
-                  <span class="node">ArgoCD ApplicationSet</span><span class="edge">&rarr;</span>
-                  <span class="node accent">Preview env <small>per PR</small></span>
+            <details class="card-more">
+               <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
+               <div class="arch" aria-label="Platform architecture diagram">
+                  <div class="arch-row">
+                     <span class="node">Pull request</span><span class="edge">&rarr;</span>
+                     <span class="node">GitHub Actions <small>build + Trivy scan</small></span><span class="edge">&rarr;</span>
+                     <span class="node">ArgoCD ApplicationSet</span><span class="edge">&rarr;</span>
+                     <span class="node accent">Preview env <small>per PR</small></span>
+                  </div>
+                  <div class="arch-row">
+                     <span class="node">Merge to main</span><span class="edge">&rarr;</span>
+                     <span class="node">ArgoCD <small>GitOps sync</small></span><span class="edge">&rarr;</span>
+                     <span class="node accent">AKS + EKS clusters <small>production</small></span>
+                  </div>
+                  <div class="arch-row">
+                     <span class="node">ExternalDNS <small>DNS records</small></span>
+                     <span class="node">cert-manager <small>TLS certs</small></span>
+                     <span class="node">NGINX Gateway Fabric <small>Gateway API</small></span><span class="edge">&rarr;</span>
+                     <span class="node accent">Services</span>
+                  </div>
                </div>
-               <div class="arch-row">
-                  <span class="node">Merge to main</span><span class="edge">&rarr;</span>
-                  <span class="node">ArgoCD <small>GitOps sync</small></span><span class="edge">&rarr;</span>
-                  <span class="node accent">AKS + EKS clusters <small>production</small></span>
-               </div>
-               <div class="arch-row">
-                  <span class="node">ExternalDNS <small>DNS records</small></span>
-                  <span class="node">cert-manager <small>TLS certs</small></span>
-                  <span class="node">NGINX Gateway Fabric <small>Gateway API</small></span><span class="edge">&rarr;</span>
-                  <span class="node accent">Services</span>
-               </div>
-            </div>
 
-            <ul class="decisions">
-               <li><b>Infrastructure as code:</b> the clusters and their node pools, including the GPU pools, are provisioned with Terraform, so the platform itself is reviewed and reproducible like any other code.</li>
-               <li><b>GitOps with ArgoCD:</b> Git is the source of truth, so every deployment is reviewed, auditable, and easy to roll back.</li>
-               <li><b>Preview environments:</b> GitHub Actions and ArgoCD ApplicationSets deploy an isolated environment for each pull request, so changes are tested before they merge.</li>
-               <li><b>Security in the pipeline:</b> Trivy scans run in CI, so vulnerabilities are caught before they reach a cluster.</li>
-               <li><b>Self-service TLS and DNS:</b> cert-manager and ExternalDNS issue certificates and create records automatically, so a new service gets an HTTPS hostname without a ticket.</li>
-               <li><b>Gateway API ingress:</b> NGINX Gateway Fabric gives teams standard, role-oriented routing.</li>
-               <li><b>GPU workloads for AI:</b> autoscaling GPU node pools serve the AI team. Taints and tolerations keep GPU nodes reserved for GPU workloads, so expensive capacity isn't spent on ordinary pods.</li>
-               <li><b>Progressive delivery (in progress):</b> adopting Argo Rollouts so releases roll out gradually instead of all at once.</li>
-               <li><b>Result:</b> 4 production clusters serving dozens of applications, all deployed through Git.</li>
-            </ul>
+               <ul class="decisions">
+                  <li><b>Infrastructure as code:</b> the clusters and their node pools, including the GPU pools, are provisioned with Terraform, so the platform itself is reviewed and reproducible like any other code.</li>
+                  <li><b>GitOps with ArgoCD:</b> Git is the source of truth, so every deployment is reviewed, auditable, and easy to roll back.</li>
+                  <li><b>Preview environments:</b> GitHub Actions and ArgoCD ApplicationSets deploy an isolated environment for each pull request, so changes are tested before they merge.</li>
+                  <li><b>Security in the pipeline:</b> Trivy scans run in CI, so vulnerabilities are caught before they reach a cluster.</li>
+                  <li><b>Self-service TLS and DNS:</b> cert-manager and ExternalDNS issue certificates and create records automatically, so a new service gets an HTTPS hostname without a ticket.</li>
+                  <li><b>Gateway API ingress:</b> NGINX Gateway Fabric gives teams standard, role-oriented routing.</li>
+                  <li><b>GPU workloads for AI:</b> autoscaling GPU node pools serve the AI team. Taints and tolerations keep GPU nodes reserved for GPU workloads, so expensive capacity isn't spent on ordinary pods.</li>
+                  <li><b>Progressive delivery (in progress):</b> adopting Argo Rollouts so releases roll out gradually instead of all at once.</li>
+                  <li><b>Result:</b> 4 production clusters serving dozens of applications, all deployed through Git.</li>
+               </ul>
+            </details>
             <ul class="tags">
                <li>AKS</li><li>EKS</li><li>Terraform</li><li>ArgoCD</li><li>Argo Rollouts</li><li>ApplicationSets</li><li>GitHub Actions</li><li>Trivy</li><li>cert-manager</li><li>ExternalDNS</li><li>NGINX Gateway Fabric</li>
             </ul>
@@ -131,18 +134,22 @@
                on AKS. More than 30 clients have been onboarded this way instead of through manual console setup.
             </p>
 
-            <div class="arch" aria-label="Client SSO onboarding flow">
-               <div class="arch-row">
-                  <span class="node">Terraform module <small>per client</small></span><span class="edge">&rarr;</span>
-                  <span class="node">AWS Cognito <small>client IdP added</small></span><span class="edge">&rarr;</span>
-                  <span class="node">SSO Checker <small>SAML 2.0 sign-in test</small></span><span class="edge">&rarr;</span>
-                  <span class="node accent">Pass / fail</span>
+            <details class="card-more">
+               <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
+               <div class="arch" aria-label="Client SSO onboarding flow">
+                  <div class="arch-row">
+                     <span class="node">Terraform module <small>per client</small></span><span class="edge">&rarr;</span>
+                     <span class="node">AWS Cognito <small>client IdP added</small></span><span class="edge">&rarr;</span>
+                     <span class="node">SSO Checker <small>SAML 2.0 sign-in test</small></span><span class="edge">&rarr;</span>
+                     <span class="node accent">Pass / fail</span>
+                  </div>
                </div>
-            </div>
 
-            <ul class="decisions">
-               <li><b>Module, not console:</b> every client is configured the same way, reviewed in a pull request, and easy to reproduce.</li>
-               <li><b>Self-service verification:</b> clients test their own SSO connection and get a clear pass or fail, so there is less back-and-forth with support.</li>            </ul>
+               <ul class="decisions">
+                  <li><b>Module, not console:</b> every client is configured the same way, reviewed in a pull request, and easy to reproduce.</li>
+                  <li><b>Self-service verification:</b> clients test their own SSO connection and get a clear pass or fail, so there is less back-and-forth with support.</li>
+               </ul>
+            </details>
             <ul class="tags">
                <li>Terraform modules</li><li>AWS Cognito</li><li>SAML 2.0</li><li>SSO</li><li>AKS</li>
             </ul>
@@ -207,42 +214,45 @@
             </div>
             <p>
                A containerized Flask app runs on a single-node k3s cluster on a Raspberry Pi and is exposed to the internet
-               through a Cloudflare Tunnel. Deploys run on ephemeral GitHub Actions runners inside the same cluster.
-               The visitor counter is serverless on AWS (API Gateway, Lambda, DynamoDB) and provisioned with Terraform,
-               with remote state in S3.
+               through a Cloudflare Tunnel. CI runs on ephemeral GitHub Actions runners inside the same cluster, and
+               deploys are handled separately by Flux GitOps. The visitor counter is serverless on AWS
+               (API Gateway, Lambda, DynamoDB) and provisioned with Terraform, with remote state in S3.
             </p>
 
-            <div class="arch" aria-label="Architecture diagram">
-               <div class="arch-row">
-                  <span class="node">Browser</span><span class="edge">&rarr;</span>
-                  <span class="node">Cloudflare <small>DNS + TLS</small></span><span class="edge">&rarr;</span>
-                  <span class="node">cloudflared pod <small>outbound-only tunnel</small></span><span class="edge">&rarr;</span>
-                  <span class="node accent">k3s on Raspberry Pi <small>Flask Deployment</small></span>
+            <details class="card-more">
+               <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
+               <div class="arch" aria-label="Architecture diagram">
+                  <div class="arch-row">
+                     <span class="node">Browser</span><span class="edge">&rarr;</span>
+                     <span class="node">Cloudflare <small>DNS + TLS</small></span><span class="edge">&rarr;</span>
+                     <span class="node">cloudflared pod <small>outbound-only tunnel</small></span><span class="edge">&rarr;</span>
+                     <span class="node accent">k3s on Raspberry Pi <small>Flask Deployment</small></span>
+                  </div>
+                  <div class="arch-row">
+                     <span class="node">Browser</span><span class="edge">&rarr;</span>
+                     <span class="node">API Gateway</span><span class="edge">&rarr;</span>
+                     <span class="node">Lambda <small>Python</small></span><span class="edge">&rarr;</span>
+                     <span class="node accent">DynamoDB</span>
+                  </div>
+                  <div class="arch-row">
+                     <span class="node">git push</span><span class="edge">&rarr;</span>
+                     <span class="node">GitHub Actions <small>test + build</small></span><span class="edge">&rarr;</span>
+                     <span class="node">Docker Hub <small>amd64 / arm64</small></span><span class="edge">&rarr;</span>
+                     <span class="node">Flux <small>image automation</small></span><span class="edge">&rarr;</span>
+                     <span class="node accent">Rolling update <small>GitOps, separate homelab repo</small></span>
+                  </div>
                </div>
-               <div class="arch-row">
-                  <span class="node">Browser</span><span class="edge">&rarr;</span>
-                  <span class="node">API Gateway</span><span class="edge">&rarr;</span>
-                  <span class="node">Lambda <small>Python</small></span><span class="edge">&rarr;</span>
-                  <span class="node accent">DynamoDB</span>
-               </div>
-               <div class="arch-row">
-                  <span class="node">git push</span><span class="edge">&rarr;</span>
-                  <span class="node">GitHub Actions</span><span class="edge">&rarr;</span>
-                  <span class="node">Docker Hub <small>amd64 / arm64</small></span><span class="edge">&rarr;</span>
-                  <span class="node">ARC runner pod <small>one per job</small></span><span class="edge">&rarr;</span>
-                  <span class="node accent">Rolling update <small>auto rollback</small></span>
-               </div>
-            </div>
 
-            <ul class="decisions">
-               <li><b>No inbound ports:</b> cloudflared runs as a pod and reaches the site by its Kubernetes Service name. The tunnel is an outbound-only connection, and TLS terminates at Cloudflare's edge.</li>
-               <li><b>Deploys on ephemeral runners:</b> each deploy runs on a short-lived runner pod inside the cluster that can update only the site's Deployment (see <a href="#project-arc-runners">Ephemeral GitHub Actions Runners</a> below). Production deploys wait for manual approval, and pull requests never reach the cluster.</li>
-               <li><b>Zero-downtime rollouts:</b> readiness probes on <code>/healthz</code> keep traffic on the old pod until the new one is healthy. If a rollout doesn't finish within two minutes, the pipeline rolls it back and fails the job.</li>
-               <li><b>Multi-arch images:</b> GitHub Actions builds for both arm64 and amd64, so the same image runs on the Pi and on cloud hosts.</li>
-               <li><b>Cost-driven migration:</b> the site originally ran on ECS Fargate behind an ALB, which cost about $50 a month for a single small container. Moving the web tier to a Pi cut hosting to near zero, and the counter API on Lambda costs pennies. The Fargate Terraform is still in the repo.</li>
-            </ul>
+               <ul class="decisions">
+                  <li><b>No inbound ports:</b> cloudflared runs as a pod and reaches the site by its Kubernetes Service name. The tunnel is an outbound-only connection, and TLS terminates at Cloudflare's edge.</li>
+                  <li><b>GitOps deploys, zero cluster credentials in CI:</b> CI only builds and pushes an image. <a href="https://fluxcd.io">Flux</a>, running from a separate <code>homelab</code> repo, notices the new tag, commits it to Git, and reconciles the cluster — the pipeline that builds the image never touches Kubernetes directly (see <a href="#project-arc-runners">Ephemeral GitHub Actions Runners</a> below for how CI itself runs).</li>
+                  <li><b>Zero-downtime rollouts:</b> readiness probes on <code>/healthz</code> keep traffic on the old pod until the new one is healthy.</li>
+                  <li><b>Multi-arch images:</b> GitHub Actions builds for both arm64 and amd64, so the same image runs on the Pi and on cloud hosts.</li>
+                  <li><b>Cost-driven migration:</b> the site originally ran on ECS Fargate behind an ALB, which cost about $50 a month for a single small container. Moving the web tier to a Pi cut hosting to near zero, and the counter API on Lambda costs pennies. The Fargate Terraform is still in the repo.</li>
+               </ul>
+            </details>
             <ul class="tags">
-               <li>Kubernetes (k3s)</li><li>Cloudflare Tunnel</li><li>GitHub Actions</li><li>Raspberry Pi</li><li>Lambda</li><li>DynamoDB</li><li>Terraform</li>
+               <li>Kubernetes (k3s)</li><li>Flux</li><li>GitOps</li><li>Cloudflare Tunnel</li><li>GitHub Actions</li><li>Raspberry Pi</li><li>Lambda</li><li>DynamoDB</li><li>Terraform</li>
             </ul>
          </article>
 
@@ -250,15 +260,22 @@
             <article class="card project" id="project-arc-runners">
                <div class="project-head">
                   <h3>Ephemeral GitHub Actions Runners on Kubernetes</h3>
-                  <a class="link" href="https://github.com/shabbirnayeem/aws-resume/tree/main/k8s"><i class="fab fa-github"></i> Source</a>
+                  <a class="link" href="https://github.com/shabbirnayeem/homelab/tree/main/infrastructure/arc"><i class="fab fa-github"></i> Source</a>
                </div>
                <p>
-                  Self-hosted CI runners on k3s with Actions Runner Controller. Each job gets a fresh pod that is deleted
-                  when the job ends, and the pool scales to zero when idle. Runners authenticate with a GitHub App
-                  (short-lived tokens, no personal access token) and deploy through a ServiceAccount that can update one
-                  Deployment and nothing else.
+                  Self-hosted CI runners on k3s with Actions Runner Controller, mirroring a similar setup at work. Each
+                  job gets a fresh pod that is deleted when the job ends, and the pool scales to zero when idle. Runners
+                  authenticate with a GitHub App (short-lived tokens, no personal access token) and hold no Kubernetes
+                  credentials at all &mdash; they only build and push images, and deploys happen separately through Flux.
                </p>
-               <ul class="tags"><li>Actions Runner Controller</li><li>Helm</li><li>RBAC</li><li>GitHub Apps</li><li>k3s</li></ul>
+               <details class="card-more">
+                  <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
+                  <ul class="decisions">
+                     <li><b>Flux-managed, not manual Helm:</b> the controller and the runner scale set are each a Flux <code>HelmRelease</code> referencing the chart directly over OCI. <code>releaseName</code> matches the original manual <code>helm install</code>, so Flux adopted the running release in place instead of creating a duplicate.</li>
+                     <li><b>No cluster credentials to leak:</b> since runners never touch Kubernetes, there's no RBAC, ServiceAccount or kubeconfig inside a runner pod for a compromised job to abuse.</li>
+                  </ul>
+               </details>
+               <ul class="tags"><li>Actions Runner Controller</li><li>Helm</li><li>Flux</li><li>GitHub Apps</li><li>k3s</li></ul>
             </article>
 
             <article class="card project">
@@ -344,45 +361,57 @@
                   <h4>DevOps Engineer</h4>
                   <span class="mono date">Nov 2023 – Apr 2026</span>
                </div>
-               <ul>
-                  <li>Deployed and operate a multi-cloud Kubernetes platform of 4 production clusters across AKS and EKS, hosting dozens of applications, with clusters and node pools provisioned in Terraform.</li>
-                  <li>Introduced GitOps with ArgoCD and built per-pull-request preview environments using GitHub Actions and ArgoCD ApplicationSets, with Trivy security scanning in CI.</li>
-                  <li>Created a self-service Terraform module that onboards each team with a Key Vault, ACR/ECR registry, repositories, Entra ID group, and an ArgoCD project scoped to its namespace.</li>
-                  <li>Automated SSO onboarding for 30+ clients with a Terraform module that configures their identity providers in AWS Cognito, and worked on SSO Checker for SAML connection testing.</li>
-                  <li>Automated ingress, TLS and DNS with NGINX Gateway Fabric, cert-manager and ExternalDNS.</li>
-                  <li>Provisioned autoscaling GPU node pools for the AI team, using taints and tolerations to isolate GPU workloads.</li>
-                  <li>Operated Atlantis for pull-request-driven Terraform workflows and migrated it from ECS to AKS. Built SFTP Helper, an internal app for managing SFTP users in Cognito.</li>
-                  <li>Currently rolling out progressive delivery with Argo Rollouts and developing an MCP server for Atlantis with Open Policy Agent policy enforcement.</li>
-               </ul>
+               <details class="card-more">
+                  <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
+                  <ul>
+                     <li>Deployed and operate a multi-cloud Kubernetes platform of 4 production clusters across AKS and EKS, hosting dozens of applications, with clusters and node pools provisioned in Terraform.</li>
+                     <li>Introduced GitOps with ArgoCD and built per-pull-request preview environments using GitHub Actions and ArgoCD ApplicationSets, with Trivy security scanning in CI.</li>
+                     <li>Created a self-service Terraform module that onboards each team with a Key Vault, ACR/ECR registry, repositories, Entra ID group, and an ArgoCD project scoped to its namespace.</li>
+                     <li>Automated SSO onboarding for 30+ clients with a Terraform module that configures their identity providers in AWS Cognito, and worked on SSO Checker for SAML connection testing.</li>
+                     <li>Automated ingress, TLS and DNS with NGINX Gateway Fabric, cert-manager and ExternalDNS.</li>
+                     <li>Provisioned autoscaling GPU node pools for the AI team, using taints and tolerations to isolate GPU workloads.</li>
+                     <li>Operated Atlantis for pull-request-driven Terraform workflows and migrated it from ECS to AKS. Built SFTP Helper, an internal app for managing SFTP users in Cognito.</li>
+                     <li>Currently rolling out progressive delivery with Argo Rollouts and developing an MCP server for Atlantis with Open Policy Agent policy enforcement.</li>
+                  </ul>
+               </details>
             </li>
             <li>
                <div class="tl-head">
                   <h3>Systems Engineer, DevOps / Infrastructure · Numerator</h3>
                   <span class="mono date">Aug 2022 – Aug 2023</span>
                </div>
-               <ul>
-                  <li>Administered Azure infrastructure and automated deployments with Terraform and Ansible.</li>
-                  <li>Operated and supported Kubernetes clusters.</li>
-               </ul>
+               <details class="card-more">
+                  <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
+                  <ul>
+                     <li>Administered Azure infrastructure and automated deployments with Terraform and Ansible.</li>
+                     <li>Operated and supported Kubernetes clusters.</li>
+                  </ul>
+               </details>
             </li>
             <li>
                <div class="tl-head">
                   <h3>Associate System Administrator · Schrödinger</h3>
                   <span class="mono date">Aug 2021 – Aug 2022</span>
                </div>
-               <ul>
-                  <li>Administered Linux, macOS and Windows systems and automated tasks with Python and Bash.</li>
-                  <li>Ran identity infrastructure (Okta, SAML, LDAP, AD) and the Atlassian suite.</li>
-               </ul>
+               <details class="card-more">
+                  <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
+                  <ul>
+                     <li>Administered Linux, macOS and Windows systems and automated tasks with Python and Bash.</li>
+                     <li>Ran identity infrastructure (Okta, SAML, LDAP, AD) and the Atlassian suite.</li>
+                  </ul>
+               </details>
             </li>
             <li>
                <div class="tl-head">
                   <h3>Help Desk Analyst · National Debt Relief</h3>
                   <span class="mono date">Nov 2018 – Aug 2021</span>
                </div>
-               <ul>
-                  <li>Administered AWS, O365 and Salesforce, and automated repetitive work with PowerShell.</li>
-               </ul>
+               <details class="card-more">
+                  <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
+                  <ul>
+                     <li>Administered AWS, O365 and Salesforce, and automated repetitive work with PowerShell.</li>
+                  </ul>
+               </details>
             </li>
             <li>
                <div class="tl-head">
