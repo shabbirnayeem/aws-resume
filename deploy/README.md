@@ -1,5 +1,9 @@
 # Deploying to the Raspberry Pi
 
+> **Not used anymore.** The site now runs on k3s, deployed via Flux GitOps from the separate
+> [`homelab`](https://github.com/shabbirnayeem/homelab) repo. This systemd-runner + docker-compose flow is kept
+> here for reference only — nothing currently runs it.
+
 Every push to `main` builds a multi-arch image on GitHub-hosted runners, tags it `latest` and `sha-<commit>`,
 and pushes it to Docker Hub. A self-hosted runner on the Pi then runs [deploy.sh](deploy.sh), which:
 
