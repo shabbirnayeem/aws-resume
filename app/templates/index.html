@@ -27,6 +27,7 @@
             <li><a href="#skills">Skills</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="{{ url_for('static', filename='resume/Shabbir Nayeem - Resume.pdf') }}" download="Shabbir-Nayeem-Resume.pdf">Résumé</a></li>
          </ul>
          <button class="theme-toggle" type="button" aria-label="Toggle color theme"><i class="fas fa-adjust"></i></button>
       </nav>
@@ -47,6 +48,7 @@
             </p>
             <div class="cta">
                <a class="btn btn-primary" href="#projects">View projects</a>
+               <a class="btn" href="{{ url_for('static', filename='resume/Shabbir Nayeem - Resume.pdf') }}" download="Shabbir-Nayeem-Resume.pdf"><i class="fas fa-file-download"></i> Résumé (PDF)</a>
                <a class="btn" href="https://github.com/shabbirnayeem"><i class="fab fa-github"></i> GitHub</a>
                <a class="btn" href="https://www.linkedin.com/in/shabbir-nayeem/"><i class="fab fa-linkedin"></i> LinkedIn</a>
             </div>
@@ -79,47 +81,178 @@
                <span class="mono date">Work · Production</span>
             </div>
             <p>
-               A production Kubernetes platform spanning four clusters across Azure (AKS) and AWS (EKS) and hosting dozens of
+               A production Kubernetes platform spanning multiple clusters across Azure (AKS) and AWS (EKS) and hosting dozens of
                applications. It combines GitOps deployments, automated TLS and DNS, Gateway API ingress, and an on-demand
                preview environment for every pull request.
             </p>
 
+            <div class="diagram-scroll">
+               <svg class="diagram" viewBox="0 0 760 390" role="img" aria-labelledby="platform-dg-title platform-dg-desc">
+                  <title id="platform-dg-title">Multi-cloud platform architecture</title>
+                  <desc id="platform-dg-desc">Pull requests in GitHub trigger GitHub Actions, which builds images, scans them with Trivy and pushes them to ACR and ECR. A dedicated ArgoCD management cluster watches Git and uses ApplicationSets, per-team AppProjects and per-pull-request preview environments to deploy to the AKS dev and prod clusters on Azure and the EKS clusters on AWS. Atlantis runs Terraform from pull requests to provision the clusters, node pools and registries. NGINX Gateway Fabric, cert-manager and ExternalDNS run as add-ons, and GPU node pools are isolated with taints and tolerations.</desc>
+                  <defs>
+                     <marker id="dg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                        <path class="dg-head" d="M0,0 L10,5 L0,10 z"/>
+                     </marker>
+                  </defs>
+
+                  <!-- Build: code to images -->
+                  <rect class="dg-box" x="20" y="70" width="110" height="70" rx="8"/>
+                  <text class="dg-t" x="75" y="100" text-anchor="middle">GitHub</text>
+                  <text class="dg-s" x="75" y="118" text-anchor="middle">PR · merge</text>
+
+                  <rect class="dg-box" x="160" y="70" width="120" height="70" rx="8"/>
+                  <text class="dg-t" x="220" y="100" text-anchor="middle">GitHub Actions</text>
+                  <text class="dg-s" x="220" y="118" text-anchor="middle">build · Trivy scan</text>
+
+                  <rect class="dg-box" x="310" y="70" width="110" height="70" rx="8"/>
+                  <text class="dg-t" x="365" y="100" text-anchor="middle">Registries</text>
+                  <text class="dg-s" x="365" y="118" text-anchor="middle">ACR · ECR</text>
+
+                  <path class="dg-edge" d="M130 105 H158"/>
+                  <path class="dg-edge" d="M280 105 H308"/>
+                  <path class="dg-edge dg-dashed" d="M365 70 V10 H660 V28"/>
+                  <text class="dg-l" x="372" y="28">image pulls</text>
+
+                  <!-- Deploy: ArgoCD management cluster -->
+                  <rect class="dg-hl-group" x="450" y="20" width="140" height="210" rx="10"/>
+                  <text class="dg-t" x="520" y="44" text-anchor="middle">ArgoCD</text>
+                  <text class="dg-s" x="520" y="60" text-anchor="middle">management cluster</text>
+                  <rect class="dg-box" x="462" y="76" width="116" height="40" rx="6"/>
+                  <text class="dg-s" x="520" y="100" text-anchor="middle">ApplicationSets</text>
+                  <rect class="dg-box" x="462" y="124" width="116" height="40" rx="6"/>
+                  <text class="dg-s" x="520" y="148" text-anchor="middle">Team AppProjects</text>
+                  <rect class="dg-box" x="462" y="172" width="116" height="40" rx="6"/>
+                  <text class="dg-s" x="520" y="196" text-anchor="middle">Preview env per PR</text>
+
+                  <path class="dg-edge" d="M75 140 V200 H448"/>
+                  <text class="dg-l" x="160" y="193">ArgoCD watches Git</text>
+
+                  <!-- Run: workload clusters -->
+                  <rect class="dg-hl" x="620" y="30" width="120" height="50" rx="8"/>
+                  <text class="dg-t" x="680" y="52" text-anchor="middle">AKS dev</text>
+                  <text class="dg-s" x="680" y="68" text-anchor="middle">Azure</text>
+                  <rect class="dg-hl" x="620" y="100" width="120" height="50" rx="8"/>
+                  <text class="dg-t" x="680" y="122" text-anchor="middle">AKS prod</text>
+                  <text class="dg-s" x="680" y="138" text-anchor="middle">Azure</text>
+                  <rect class="dg-hl" x="620" y="170" width="120" height="50" rx="8"/>
+                  <text class="dg-t" x="680" y="192" text-anchor="middle">EKS</text>
+                  <text class="dg-s" x="680" y="208" text-anchor="middle">AWS</text>
+
+                  <path class="dg-edge" d="M590 55 H618"/>
+                  <path class="dg-edge" d="M590 125 H618"/>
+                  <path class="dg-edge" d="M590 195 H618"/>
+
+                  <!-- Provision: Terraform via Atlantis -->
+                  <rect class="dg-box" x="20" y="268" width="720" height="48" rx="8"/>
+                  <text class="dg-t" x="36" y="297">Terraform via Atlantis</text>
+                  <text class="dg-s" x="190" y="297">plan / apply from pull requests · provisions clusters, node pools (incl. GPU) and registries</text>
+                  <path class="dg-edge" d="M40 140 V266"/>
+                  <path class="dg-line" d="M752 268 V55"/>
+                  <path class="dg-edge" d="M752 55 H742"/>
+                  <path class="dg-edge" d="M752 125 H742"/>
+                  <path class="dg-edge" d="M752 195 H742"/>
+                  <text class="dg-l" x="746" y="250" text-anchor="end">provisions</text>
+
+                  <!-- Cluster add-ons -->
+                  <rect class="dg-group" x="20" y="330" width="720" height="44" rx="8"/>
+                  <text class="dg-group-t" x="36" y="357">Add-ons</text>
+                  <text class="dg-s" x="110" y="357">NGINX Gateway Fabric · cert-manager · ExternalDNS · GPU node pools on AKS (taints + node affinity)</text>
+               </svg>
+            </div>
+
             <details class="card-more">
                <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
-               <div class="arch" aria-label="Platform architecture diagram">
-                  <div class="arch-row">
-                     <span class="node">Pull request</span><span class="edge">&rarr;</span>
-                     <span class="node">GitHub Actions <small>build + Trivy scan</small></span><span class="edge">&rarr;</span>
-                     <span class="node">ArgoCD ApplicationSet</span><span class="edge">&rarr;</span>
-                     <span class="node accent">Preview env <small>per PR</small></span>
-                  </div>
-                  <div class="arch-row">
-                     <span class="node">Merge to main</span><span class="edge">&rarr;</span>
-                     <span class="node">ArgoCD <small>GitOps sync</small></span><span class="edge">&rarr;</span>
-                     <span class="node accent">AKS + EKS clusters <small>production</small></span>
-                  </div>
-                  <div class="arch-row">
-                     <span class="node">ExternalDNS <small>DNS records</small></span>
-                     <span class="node">cert-manager <small>TLS certs</small></span>
-                     <span class="node">NGINX Gateway Fabric <small>Gateway API</small></span><span class="edge">&rarr;</span>
-                     <span class="node accent">Services</span>
-                  </div>
-               </div>
-
                <ul class="decisions">
                   <li><b>Infrastructure as code:</b> the clusters and their node pools, including the GPU pools, are provisioned with Terraform, so the platform itself is reviewed and reproducible like any other code.</li>
                   <li><b>GitOps with ArgoCD:</b> Git is the source of truth, so every deployment is reviewed, auditable, and easy to roll back.</li>
+                  <li><b>Why a separate ArgoCD management cluster:</b> one control plane deploys to every AKS and EKS cluster, so the workload clusters don't each run and upgrade their own ArgoCD, and a problem in one workload cluster doesn't take down deployments to the others.</li>
+                  <li><b>Why ApplicationSets:</b> instead of hand-writing an ArgoCD Application for every app and environment, one ApplicationSet template generates them. For preview environments, it creates an Application when a pull request opens and deletes it when the pull request closes, so previews never need manual setup or cleanup.</li>
                   <li><b>Preview environments:</b> GitHub Actions and ArgoCD ApplicationSets deploy an isolated environment for each pull request, so changes are tested before they merge.</li>
                   <li><b>Security in the pipeline:</b> Trivy scans run in CI, so vulnerabilities are caught before they reach a cluster.</li>
                   <li><b>Self-service TLS and DNS:</b> cert-manager and ExternalDNS issue certificates and create records automatically, so a new service gets an HTTPS hostname without a ticket.</li>
                   <li><b>Gateway API ingress:</b> NGINX Gateway Fabric gives teams standard, role-oriented routing.</li>
-                  <li><b>GPU workloads for AI:</b> autoscaling GPU node pools serve the AI team. Taints and tolerations keep GPU nodes reserved for GPU workloads, so expensive capacity isn't spent on ordinary pods.</li>
+                  <li><b>GPU workloads for AI:</b> dedicated, autoscaling GPU node pools on AKS (see <a href="#project-gpu">GPU Infrastructure for the AI Team</a> below).</li>
                   <li><b>Progressive delivery (in progress):</b> adopting Argo Rollouts so releases roll out gradually instead of all at once.</li>
-                  <li><b>Result:</b> 4 production clusters serving dozens of applications, all deployed through Git.</li>
+                  <li><b>Result:</b> multiple production clusters serving dozens of applications, all deployed through Git.</li>
                </ul>
             </details>
             <ul class="tags">
                <li>AKS</li><li>EKS</li><li>Terraform</li><li>ArgoCD</li><li>Argo Rollouts</li><li>ApplicationSets</li><li>GitHub Actions</li><li>Trivy</li><li>cert-manager</li><li>ExternalDNS</li><li>NGINX Gateway Fabric</li>
+            </ul>
+         </article>
+
+         <article id="project-gpu" class="card project featured">
+            <div class="project-head">
+               <h3>GPU Infrastructure for the AI Team</h3>
+               <span class="mono date">Work · AKS</span>
+            </div>
+            <p>
+               Dedicated GPU node pools on AKS for the AI team's workloads, provisioned with Terraform. GPU nodes only
+               run GPU workloads, and the pools scale down to zero when nothing is running, so expensive GPU capacity is
+               paid for only while it's in use.
+            </p>
+
+            <div class="arch" aria-label="GPU scheduling flow">
+               <div class="arch-row">
+                  <span class="node">AI workload <small>toleration + node affinity</small></span><span class="edge">&rarr;</span>
+                  <span class="node">AKS scheduler</span><span class="edge">&rarr;</span>
+                  <span class="node accent">GPU node pool <small>tainted · autoscales 0 &rarr; N</small></span>
+               </div>
+               <div class="arch-row">
+                  <span class="node">Ordinary pod <small>no toleration</small></span><span class="edge">&rarr;</span>
+                  <span class="node">AKS scheduler</span><span class="edge">&rarr;</span>
+                  <span class="node">General node pool <small>kept off GPU nodes</small></span>
+               </div>
+            </div>
+
+            <details class="card-more">
+               <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
+               <ul class="decisions">
+                  <li><b>Taints keep everything else out:</b> the GPU pools carry a taint, so pods without a matching toleration can't be scheduled there and never take up GPU capacity.</li>
+                  <li><b>Tolerations alone aren't enough:</b> a toleration only <i>allows</i> a pod onto GPU nodes. GPU workloads also use a nodeSelector and node affinity, which <i>require</i> them to land there instead of on a general node.</li>
+                  <li><b>Scale to zero:</b> the pools autoscale, adding GPU nodes when GPU pods are waiting and removing them when idle, so the cluster isn't paying for idle GPUs.</li>
+                  <li><b>Managed in Terraform:</b> the GPU pools are defined alongside the clusters and other node pools, so changes are reviewed in a pull request like any other infrastructure.</li>
+               </ul>
+            </details>
+            <ul class="tags">
+               <li>AKS</li><li>GPU node pools</li><li>Taints &amp; tolerations</li><li>Node affinity</li><li>Autoscaling</li><li>Terraform</li>
+            </ul>
+         </article>
+
+         <article id="project-atlantis-mcp" class="card project featured">
+            <div class="project-head">
+               <h3>Atlantis MCP Server: AI-Assisted Terraform with Guardrails</h3>
+               <span class="mono date">In development</span>
+            </div>
+            <p>
+               An MCP server that lets Claude work through our Terraform workflow. A developer describes the infrastructure
+               they need, and Claude writes the Terraform for Azure or AWS, opens a pull request and runs an Atlantis plan.
+               Open Policy Agent policies enforce our standards, and nothing is applied without human approval. It's in
+               development, with a few developers testing it.
+            </p>
+
+            <div class="arch" aria-label="AI-assisted Terraform flow">
+               <div class="arch-row">
+                  <span class="node">Developer request</span><span class="edge">&rarr;</span>
+                  <span class="node">Claude <small>via MCP server</small></span><span class="edge">&rarr;</span>
+                  <span class="node">Terraform PR <small>Azure or AWS</small></span><span class="edge">&rarr;</span>
+                  <span class="node">Atlantis plan <small>+ OPA standards</small></span><span class="edge">&rarr;</span>
+                  <span class="node accent">Human approval</span><span class="edge">&rarr;</span>
+                  <span class="node">Apply</span>
+               </div>
+            </div>
+
+            <details class="card-more">
+               <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
+               <ul class="decisions">
+                  <li><b>Human in the loop:</b> Claude can write code, open pull requests and run plans, but it can't apply. Every apply needs a person's approval, the same as any other infrastructure change.</li>
+                  <li><b>Policy as code:</b> Open Policy Agent policies encode our standards, so Terraform written by Claude is checked against the same rules as Terraform written by people.</li>
+                  <li><b>No side door:</b> the MCP server works through the existing pull-request and Atlantis workflow rather than calling the clouds directly, so every AI-made change is reviewed, planned and recorded in Git.</li>
+               </ul>
+            </details>
+            <ul class="tags">
+               <li>MCP</li><li>Claude</li><li>Atlantis</li><li>Terraform</li><li>Open Policy Agent</li><li>Azure</li><li>AWS</li>
             </ul>
          </article>
 
@@ -155,7 +288,7 @@
             </ul>
          </article>
 
-         <div class="grid grid-2">
+         <div class="grid grid-3">
             <article class="card project">
                <div class="project-head">
                   <h3>Self-Service Team Onboarding Module</h3>
@@ -179,18 +312,6 @@
                   anything changes. Originally deployed on ECS, it was later migrated onto the AKS platform.
                </p>
                <ul class="tags"><li>Atlantis</li><li>Terraform</li><li>ECS</li><li>AKS</li></ul>
-            </article>
-
-            <article class="card project">
-               <div class="project-head">
-                  <h3>Atlantis MCP Server</h3>
-                  <span class="mono date">In progress</span>
-               </div>
-               <p>
-                  Developing an MCP server that lets AI assistants work with Atlantis, with Open Policy Agent
-                  policies enforcing what they are allowed to do.
-               </p>
-               <ul class="tags"><li>MCP</li><li>Atlantis</li><li>Open Policy Agent</li><li>Terraform</li></ul>
             </article>
 
             <article class="card project">
@@ -272,7 +393,7 @@
                   <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
                   <ul class="decisions">
                      <li><b>Flux-managed, not manual Helm:</b> the controller and the runner scale set are each a Flux <code>HelmRelease</code> referencing the chart directly over OCI. <code>releaseName</code> matches the original manual <code>helm install</code>, so Flux adopted the running release in place instead of creating a duplicate.</li>
-                     <li><b>No cluster credentials to leak:</b> since runners never touch Kubernetes, there's no RBAC, ServiceAccount or kubeconfig inside a runner pod for a compromised job to abuse.</li>
+                     <li><b>Why runners have no Kubernetes credentials:</b> CI runs whatever code a workflow contains, including third-party actions and dependencies, so it's the most likely part of the pipeline to be compromised. Deploys are pull-based instead: CI only pushes an image, and Flux, running inside the cluster, pulls the change from Git. There's no RBAC, ServiceAccount or kubeconfig in a runner pod, so a compromised job can't read Secrets or change cluster resources. The remaining risk, a bad image, goes through the same path as every deploy: Flux commits the new tag to Git, where it's visible and can be reverted.</li>
                   </ul>
                </details>
                <ul class="tags"><li>Actions Runner Controller</li><li>Helm</li><li>Flux</li><li>GitHub Apps</li><li>k3s</li></ul>
@@ -364,13 +485,15 @@
                <details class="card-more">
                   <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
                   <ul>
-                     <li>Deployed and operate a multi-cloud Kubernetes platform of 4 production clusters across AKS and EKS, hosting dozens of applications, with clusters and node pools provisioned in Terraform.</li>
+                     <li>Deployed and operate a multi-cloud Kubernetes platform of multiple production clusters across AKS and EKS, hosting dozens of applications, with clusters and node pools provisioned in Terraform.</li>
                      <li>Introduced GitOps with ArgoCD and built per-pull-request preview environments using GitHub Actions and ArgoCD ApplicationSets, with Trivy security scanning in CI.</li>
                      <li>Created a self-service Terraform module that onboards each team with a Key Vault, ACR/ECR registry, repositories, Entra ID group, and an ArgoCD project scoped to its namespace.</li>
                      <li>Automated SSO onboarding for 30+ clients with a Terraform module that configures their identity providers in AWS Cognito, and worked on SSO Checker for SAML connection testing.</li>
                      <li>Automated ingress, TLS and DNS with NGINX Gateway Fabric, cert-manager and ExternalDNS.</li>
                      <li>Provisioned autoscaling GPU node pools for the AI team, using taints and tolerations to isolate GPU workloads.</li>
                      <li>Operated Atlantis for pull-request-driven Terraform workflows and migrated it from ECS to AKS. Built SFTP Helper, an internal app for managing SFTP users in Cognito.</li>
+                     <li>Developed Python automation, including Lambda services and SFTP tooling, to reduce manual operational work.</li>
+                     <li>Owned 24/7 on-call support and authored runbooks, improving incident response and cross-team coordination.</li>
                      <li>Currently rolling out progressive delivery with Argo Rollouts and developing an MCP server for Atlantis with Open Policy Agent policy enforcement.</li>
                   </ul>
                </details>
@@ -383,8 +506,10 @@
                <details class="card-more">
                   <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
                   <ul>
-                     <li>Administered Azure infrastructure and automated deployments with Terraform and Ansible.</li>
-                     <li>Operated and supported Kubernetes clusters.</li>
+                     <li>Administered Azure infrastructure and automated provisioning and deployments with Terraform and Ansible.</li>
+                     <li>Developed Python automation for deployment and operational workflows.</li>
+                     <li>Operated and supported Kubernetes clusters and production systems, and took part in incident response.</li>
+                     <li>Implemented security controls and best practices across cloud and infrastructure environments.</li>
                   </ul>
                </details>
             </li>
@@ -396,8 +521,8 @@
                <details class="card-more">
                   <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
                   <ul>
-                     <li>Administered Linux, macOS and Windows systems and automated tasks with Python and Bash.</li>
-                     <li>Ran identity infrastructure (Okta, SAML, LDAP, AD) and the Atlassian suite.</li>
+                     <li>Managed Linux, macOS and Windows environments for 500+ users and automated internal workflows with Python and Bash.</li>
+                     <li>Ran identity and directory infrastructure (Okta, SAML, LDAP, AD), JAMF device management, and the Atlassian suite.</li>
                   </ul>
                </details>
             </li>
@@ -409,6 +534,7 @@
                <details class="card-more">
                   <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
                   <ul>
+                     <li>Supported 1,000+ users across hardware and software, and handled Office 365 and Active Directory onboarding for 50+ users a month.</li>
                      <li>Administered AWS, O365 and Salesforce, and automated repetitive work with PowerShell.</li>
                   </ul>
                </details>
@@ -418,6 +544,12 @@
                   <h3>IT Support Intern · Independence Care System</h3>
                   <span class="mono date">Jul 2017 – Nov 2018</span>
                </div>
+               <details class="card-more">
+                  <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
+                  <ul>
+                     <li>Provided IT support for 500+ users across multiple locations, and managed Active Directory and Exchange accounts.</li>
+                  </ul>
+               </details>
             </li>
          </ol>
       </section>
@@ -431,11 +563,18 @@
             <div class="card cert"><i class="fas fa-dharmachakra"></i><div><h3>Kubernetes and Cloud Native Associate (KCNA)</h3><p class="mono date">Dec 2025</p></div></div>
             <div class="card cert"><i class="fas fa-dharmachakra"></i><div><h3>Certified Kubernetes Application Developer (CKAD)</h3><p class="mono date">Nov 2025</p></div></div>
             <div class="card cert"><i class="fas fa-dharmachakra"></i><div><h3>Certified Kubernetes Administrator (CKA)</h3><p class="mono date">Oct 2025</p></div></div>
-            <div class="card cert"><i class="fab fa-aws"></i><div><h3>AWS Certified Solutions Architect</h3><p class="mono date">Oct 2020</p></div></div>
+            <div class="card cert"><i class="fab fa-aws"></i><div><h3>AWS Certified Solutions Architect – Associate</h3><p class="mono date">Oct 2020</p></div></div>
             <div class="card cert"><i class="fab fa-microsoft"></i><div><h3>Azure Fundamentals (AZ-900)</h3><p class="mono date">Jan 2021</p></div></div>
             <div class="card cert"><i class="fab fa-linux"></i><div><h3>CompTIA Linux+</h3><p class="mono date">Jan 2020</p></div></div>
             <div class="card cert"><i class="fas fa-network-wired"></i><div><h3>Cisco CCNA Routing &amp; Switching</h3><p class="mono date">Mar 2018</p></div></div>
          </div>
+      </section>
+
+      <!-- Education
+      ================================================== -->
+      <section id="education" class="section container">
+         <h2 class="section-title"><span class="mono">~/</span>education</h2>
+         <div class="card cert"><i class="fas fa-graduation-cap"></i><div><h3>Bachelor of Technology in Computer Systems</h3><p class="mono date">New York City College of Technology, Brooklyn, NY</p></div></div>
       </section>
 
       <!-- Contact
@@ -445,6 +584,7 @@
          <p class="lead">Open to conversations about DevOps, SRE and platform engineering roles.</p>
          <div class="cta">
             <a class="btn btn-primary" href="https://www.linkedin.com/in/shabbir-nayeem/"><i class="fab fa-linkedin"></i> Message me on LinkedIn</a>
+            <a class="btn" href="{{ url_for('static', filename='resume/Shabbir Nayeem - Resume.pdf') }}" download="Shabbir-Nayeem-Resume.pdf"><i class="fas fa-file-download"></i> Résumé (PDF)</a>
             <a class="btn" href="https://github.com/shabbirnayeem"><i class="fab fa-github"></i> GitHub</a>
             <a class="btn" href="https://gitlab.com/shabbirnayeem"><i class="fab fa-gitlab"></i> GitLab</a>
          </div>

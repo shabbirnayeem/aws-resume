@@ -25,6 +25,7 @@ def test_healthz(client):
     '/static/js/portfolio.js',
     '/static/images/profile.jpg',
     '/static/images/favicon.png',
+    '/static/resume/Shabbir%20Nayeem%20-%20Resume.pdf',
 ])
 def test_static_assets_exist(client, path):
     assert client.get(path).status_code == 200
