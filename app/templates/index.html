@@ -459,11 +459,11 @@
             </div>
             <div class="card skill-group">
                <h3><i class="fas fa-heartbeat"></i> Observability &amp; Reliability</h3>
-               <ul class="tags"><li>Prometheus</li><li>Grafana</li><li>CloudWatch</li><li>PagerDuty</li></ul>
+               <ul class="tags"><li>Datadog</li><li>Prometheus</li><li>Grafana</li><li>CloudWatch</li><li>PagerDuty</li></ul>
             </div>
             <div class="card skill-group">
                <h3><i class="fas fa-terminal"></i> Scripting &amp; Systems</h3>
-               <ul class="tags"><li>Python</li><li>Bash</li><li>PowerShell</li><li>Linux</li></ul>
+               <ul class="tags"><li>Python</li><li>Bash</li><li>PowerShell</li><li>Linux</li><li>LVM &amp; storage</li><li>PostgreSQL</li></ul>
             </div>
          </div>
       </section>
@@ -485,14 +485,16 @@
                <details class="card-more">
                   <summary class="read-more-toggle"><i class="fas fa-chevron-right chevron"></i><span class="label-more">Read more</span><span class="label-less">Show less</span></summary>
                   <ul>
-                     <li>Deployed and operate a multi-cloud Kubernetes platform of multiple production clusters across AKS and EKS, hosting dozens of applications, with clusters and node pools provisioned in Terraform.</li>
+                     <li>Deployed and operate a multi-cloud Kubernetes platform of multiple production clusters across AKS and EKS, hosting dozens of applications, with clusters and node pools provisioned in Terraform and ingress, TLS and DNS automated with NGINX Gateway Fabric, cert-manager and ExternalDNS.</li>
                      <li>Introduced GitOps with ArgoCD and built per-pull-request preview environments using GitHub Actions and ArgoCD ApplicationSets, with Trivy security scanning in CI.</li>
                      <li>Created a self-service Terraform module that onboards each team with a Key Vault, ACR/ECR registry, repositories, Entra ID group, and an ArgoCD project scoped to its namespace.</li>
                      <li>Automated SSO onboarding for 30+ clients with a Terraform module that configures their identity providers in AWS Cognito, and worked on SSO Checker for SAML connection testing.</li>
-                     <li>Automated ingress, TLS and DNS with NGINX Gateway Fabric, cert-manager and ExternalDNS.</li>
                      <li>Provisioned autoscaling GPU node pools for the AI team, using taints and tolerations to isolate GPU workloads.</li>
                      <li>Operated Atlantis for pull-request-driven Terraform workflows and migrated it from ECS to AKS. Built SFTP Helper, an internal app for managing SFTP users in Cognito.</li>
                      <li>Developed Python automation, including Lambda services and SFTP tooling, to reduce manual operational work.</li>
+                     <li>Deployed Datadog agents to the Kubernetes clusters and Azure infrastructure for monitoring.</li>
+                     <li>Supported the database team with PostgreSQL storage: added and resized Azure disks using Linux tools, migrated data between disks, and rebuilt a single-disk setup as a three-disk LVM volume to improve performance.</li>
+                     <li>Administered servers across AWS, Azure and on-prem, troubleshot networking issues between AWS and Azure and between applications and on-prem databases, and supported the Okta deployment.</li>
                      <li>Owned 24/7 on-call support and authored runbooks, improving incident response and cross-team coordination.</li>
                      <li>Currently rolling out progressive delivery with Argo Rollouts and developing an MCP server for Atlantis with Open Policy Agent policy enforcement.</li>
                   </ul>
